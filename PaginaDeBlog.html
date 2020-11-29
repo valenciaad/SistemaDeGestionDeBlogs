@@ -1,0 +1,81 @@
+<!DOCTYPE >
+<html lang="es">
+    <meta charset="UTF-8" />
+    <head>
+        <title>Pagina de Blog</title>
+        <!-- [if lt  IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js>"
+            </script>
+        <![endif]-->
+    </head>
+    <body>
+        <header id="headerPrincipal" role="banner">
+            <!--branding and navigation-->            
+                <h1>Sistema de gestions de blogs</h1>
+                <figure>
+                    <figcaption>Logo del Blog</figcaption>
+                    <img>
+                </figure>
+                <p>Slogan va a qui</p>            
+           <h2>Menu</h2> 
+            <nav role="navigation">
+                <ul>
+                    <li><a href="PanelDeUsuario.html" title="Ve al tu pandel de usuario">Panel de de usuario</a></li>
+                    <li><a href="PanelDeBlog.html" title="Ve al tu pandel de blog">Panel de de Blog</a></li>
+                </ul>              
+            </nav>        
+        </header>
+        <main id = "contenidoBlog" role="main">   
+            <!--Main content-->         
+            <article role="article">
+                <h2 class ="tituloBlog">Titulo del blog</h2>
+                <p>Contenido del blog...</p>                        
+               <figure>
+                    <figcaption>Imagen que representa el contenido de este blog</figcaption>
+                    <img>
+                </figure>
+                <section id = "comentarios">
+                    <!--comments-->
+                    <h2>Comentarios:</h2>
+                    <form >
+                        <label for="tComentario">Deja tu comentario</label>
+                        <textarea  name="tComentario" id="tComentario" placeholder="Escribe tu comentario ..."></textarea>
+                        <br />
+                        <input type="submit" name="Comentar" value="Comentar" />
+                    </form>
+                    <article class="comentario">
+                        <h3>Comentario1</h3>
+                        <p>Nombre de la persona 1</p>
+                        <p>Comentario de la persona 1</p>
+                    </article>
+                    <article class="comentario" >
+                        <h3>Comentario2</h3>
+                        <p>Nombre de la persona 2</p>
+                        <p>Comentario de la persona 2</p>
+                    </article>
+                </section>
+            </article>
+        </main>
+        <section id ="CEE">
+            <h2>Barra de herminetas</h2>
+                <!--tool bar-->
+                <ul>
+                    <li><a href="CrearBlog.html" title="Crea un nuevo Blog">Crear Blog</a></li>
+                    <li><a href="Editar.html" title="Edita este Blog">Editar</a></li>
+                    <li><a href="Eliminar.html" title="Elimina este blog">Eliminar</a></li>
+                </ul>
+            
+        </section>
+        <section id="busqueda" role="search">
+            <h2>
+                <!--searh-->
+                <form>
+                    <label for="Buscar">Buscar</label>
+                    <input type="search" name="Buscar" id="Buscar" placeholder="Escribe una palabra clave ..." />
+                    <br />
+                    <input type="submit" name="Buscar" value="Buscar" />
+                </form>
+            </h2>
+        </section>
+    </body>
+</html>
