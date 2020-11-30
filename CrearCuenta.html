@@ -16,17 +16,28 @@
         </figure>
         <p>Slogan va a qui</p>
     </header>
-    <div>
-        <div>
-            <h2>Bienvenido</h2>
+    <main id="contenidoBlog" role="main">
+        <h2>Bienvenido</h2>
+        <article role="article">
             <form action="">
                 <input type="text" name="name" id="id_name" placeholder="Escribe tu nombre..."><br><br>
                 <input type="text" name="mail" id="id_mail" placeholder="Escribe tu correo..."><br><br>
                 <input type="password" name="pssw" id="id_pssw" placeholder="Crea una contraseña..."><br><br>
                 <input type="submit" value="Crear Cuenta">
             </form>
-        </div>
-    </div>
+        </article>
+    </main>
+    <section id="busqueda" role="search">
+        <h2>
+            <!--searh-->
+            <form>
+                <label for="Buscar">Buscar</label>
+                <input type="search" name="Buscar" id="Buscar" placeholder="Escribe una palabra clave ..." />
+                <br />
+                <input type="submit" name="Buscar" value="Buscar" />
+            </form>
+        </h2>
+    </section>
 </body>
 
 </html>
