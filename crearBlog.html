@@ -3,7 +3,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <head>
-        <title>Pagina de Blog</title>
+        <title>Crear Blog</title>
         <!-- [if lt  IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js>"
             </script>
@@ -28,14 +28,25 @@
         </header>
         <main id = "contenidoBlog" role="main">   
             <!--Main content-->         
-            <article role="list">
+            <article role="article">
                 <!--aqui va el contenido de la pagina-->  
-                <h2>Busqueda</h2>
-                <ul id="categorias">
-                  <li><button>Categoria 1</button></li>
-                  <li><button>Categoria 2</button></li>
-                  <li><button>Categoria 3</button></li>
-              </ul>
+            <h2 class ="titulo">Crea/edita tu blog</h2>
+            <form>
+            <label for="subirImagen">Sube una imagen</label>
+            <input type="file" name="subirImagen" id="subirImagen">
+            <br />
+            <textarea  name="cuerpoBlog" id="cuerpoBlog" placeholder="Escribe algo interesante..."></textarea>
+            <br>
+            <label for="categorias">Escoge una categoria:</label>            
+            <select id="categorias" name="categorias">
+            <option value="categoria1">Categoria 1</option>
+            <option value="categoria2">Categoria 2</option>
+            <option value="categoria3">Categoria 3</option>
+            <option value="categoria4">Categoria 4</option>
+            </select>
+            <br>
+            <input type="submit" name="upload" id="upload" value="Upload">
+            </form>
             </article>
         </main>        
         <section id="busqueda" role="search">
