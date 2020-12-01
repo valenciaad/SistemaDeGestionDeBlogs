@@ -32,13 +32,14 @@ body {
     font-family: 'Helvetica', sans-serif;
     font-size: 15px;
     line-height: 1.5;
-    max-width: 80%;
+    max-width: 90%;
     margin: 0 auto;
     
   }
   .contenedor {
     text-align: center;
     padding-bottom: 1px;
+    
   }
 .input{
 
@@ -160,15 +161,16 @@ main {
 #busqueda{
     background: #2E5077;
     grid-area: busqueda;
+    overflow: auto;
     
 }
 .recientes {
     margin: auto 10% ;
     text-align: left;
     list-style: none; 
-    background: #D7E8BA;
+    background: #F6FAF0;
     border: 1px solid #2E5077;    
-    box-shadow: 0 0 10px #000000;
+    box-shadow: 0 0 10px #000000;    
 }
 
 
@@ -199,3 +201,4 @@ main {
   display: inline-block
     
 }
+
