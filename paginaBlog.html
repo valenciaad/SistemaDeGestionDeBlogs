@@ -1,6 +1,7 @@
 <!DOCTYPE >
 <html lang="es">
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <head>
         <title>Pagina de Blog</title>
         <!-- [if lt  IE 9]>
@@ -20,7 +21,7 @@
            <h2>Menu</h2> 
             <nav role="navigation">
                 <ul>
-                    <li><a href="PanelDeUsuario.html" title="Ve al tu pandel de usuario">Panel de de usuario</a></li>
+                    <li><a href="panelUsuario.html" title="Ve al tu pandel de usuario">Panel de de usuario</a></li>
                     <li><a href="PanelDeBlog.html" title="Ve al tu pandel de blog">Panel de de Blog</a></li>
                 </ul>              
             </nav>        
@@ -60,14 +61,14 @@
             <h2>Barra de herminetas</h2>
                 <!--tool bar-->
                 <ul>
-                    <li><a href="CrearBlog.html" title="Crea un nuevo Blog">Crear Blog</a></li>
-                    <li><a href="Editar.html" title="Edita este Blog">Editar</a></li>
+                    <li><a href="crearBlog.html" title="Crea un nuevo Blog">Crear Blog</a></li>
+                    <li><a href="crearBlog.html" title="Edita este Blog">Editar</a></li>
                     <li><a href="Eliminar.html" title="Elimina este blog">Eliminar</a></li>
                 </ul>
             
         </section>
         <section id="busqueda" role="search">
-            <h2>
+            <h2>Busqueda y blogs recientes</h2>
                 <!--searh-->
                 <form>
                     <label for="Buscar">Buscar</label>
@@ -75,7 +76,13 @@
                     <br />
                     <input type="submit" name="Buscar" value="Buscar" />
                 </form>
-            </h2>
+            <aside id="recientes">
+                <ul>
+                    <li><a href="paginaBlog.html" title="Ve al blog reciente 1">Reciente 1</a></li>
+                    <li><a href="paginaBlog.html" title="Ve al blog reciente 2">Reciente 2</a></li>
+                    <li><a href="paginaBlog.html" title="Ve al blog reciente 3">Reciente 3</a></li>
+                </ul>
+            </aside>
         </section>
     </body>
 </html>

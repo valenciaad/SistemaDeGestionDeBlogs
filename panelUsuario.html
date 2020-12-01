@@ -1,0 +1,75 @@
+<!DOCTYPE >
+<html lang="es">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <title>Panel de usuario</title>
+        <!-- [if lt  IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js>"
+            </script>
+        <![endif]-->
+    </head>
+    <body>
+        <header id="headerPrincipal" role="banner" >
+            <!--branding and navigation-->            
+                <h1>Sistema de gestions de blogs</h1>
+                <figure>
+                    <figcaption>Logo del Blog</figcaption>
+                    <img>
+                </figure>
+                <p>Slogan va a qui</p>            
+           <h2>Menu</h2> 
+            <nav role="navigation">
+                <ul>
+                    <li><a href="panelUsuario.html" title="Ve al tu pandel de usuario">Panel de de usuario</a></li>
+                    <li><a href="panelBlog.html" title="Ve al tu pandel de blog">Panel de de Blog</a></li>
+                </ul>              
+            </nav>        
+        </header>
+        <main id = "contenidoPanel" role="main">   
+            <!--Main content-->         
+            <article role="article">
+                <h2 class ="tituloBlog">Panel de usuario</h2>
+                <!--aqui va el contenido de la pagina--> 
+                <ul>
+                    <li><a href="recuperar.html" title="Ve al tu pandel de usuario">Cambiar o recumperar contraseña</a></li>
+                    <li><a href="paginaBlog.html" title="Ve al tu pandel de blog">Saber más</a></li>
+                    <li><a href="paginaBlog.html" title="Ve al tu pandel de blog">Haz que mas personas encuentren tu blog online</a></li>
+                </ul>
+                <figure>
+                    <figcaption>Imagen representativa sobre la pagina web</figcaption>
+                    <img>
+                </figure>
+                <form >
+                    <label for="usuairos">Escoge un usuairo:</label>
+                    <select id="usuario" name="usuario">
+                          <option value="usuario1">usuario 1</option>
+                          <option value="usuario2">usuario 2</option>
+                          <option value="usuario3">usuario 3</option>
+                          <option value="usuario4">usuario 4</option>
+                     </select>
+                        <input type="submit"  value="Eliminar">
+                 </form>                    
+               
+                
+            </article>
+        </main>        
+        <section id="busqueda" role="search">
+            <h2>Busqueda y blogs recientes</h2>
+                <!--searh-->
+                <form>
+                    <label for="Buscar">Buscar</label>
+                    <input type="search" name="Buscar" id="Buscar" placeholder="Escribe una palabra clave ..." />
+                    <br />
+                    <input type="submit" name="Buscar" value="Buscar" />
+                </form>
+            <aside id="recientes">
+                <ul>
+                    <li><a href="paginaBlog.html" title="Ve al blog reciente 1">Reciente 1</a></li>
+                    <li><a href="paginaBlog.html" title="Ve al blog reciente 2">Reciente 2</a></li>
+                    <li><a href="paginaBlog.html" title="Ve al blog reciente 3">Reciente 3</a></li>
+                </ul>
+            </aside>
+        </section>
+    </body>
+</html>
