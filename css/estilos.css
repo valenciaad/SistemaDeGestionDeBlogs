@@ -31,6 +31,14 @@ body {
     font-family: 'Helvetica', sans-serif;
     font-size: 15px;
     line-height: 1.5;
+    
+  }
+  .contenedor {
+    text-align: center;
+  } 
+/* Grids
+-----------------------------*/  
+.grid3por2{
     display: grid;
     grid-template-columns: 1.3fr 0.7fr;
     grid-template-rows: 1fr  0.6fr 26.4% 5.8fr;
@@ -40,12 +48,26 @@ body {
     "main CEE"
     "main busqueda"
     "comentarios comentarios";
-
-
+}
+.grid2por2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "header header"
+      "main busqueda";
   }
-.contenedor {
-    text-align: center;
-  }
+.grid2por1{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "header"
+      "main";   
+}  
+
 /*Navegacion
 -----------------------------------------------*/
 header {

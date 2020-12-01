@@ -3,6 +3,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <head>
+        <link rel="stylesheet" href="css/estilos.css"> 
         <title>Pagina de Blog</title>
         <!-- [if lt  IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js>"
@@ -10,6 +11,7 @@
         <![endif]-->
     </head>
     <body>
+    <div class = grid2por1></div>
         <header id="headerPrincipal" role="banner" >
             <!--branding and navigation-->            
                
@@ -19,21 +21,18 @@
                 </figure>
                 <p>Slogan va aqui</p>            
            <h2>Menu</h2> 
-            <nav role="navigation">
+            <nav role="navigation" class="navegacion">
                 <ul>
                     <li><a href="PanelDeUsuario.html" title="Ve al tu pandel de usuario">Panel de de usuario</a></li>
                     <li><a href="PanelDeBlog.html" title="Ve al tu pandel de blog">Panel de de Blog</a></li>
                 </ul>              
             </nav>        
         </header>
-        <main id = "contenidoBlog" role="main">   
+        <main id = "contenidoBlog" role="main" class ="contenedor">   
             <!--Main content-->         
             <article role="article">
                 <!--aqui va el contenido de la pagina-->  
-            </article>
-        </main>        
-        <section id="busqueda" role="search">
-            <h2>Resualtados de busqueda por categoria</h2>
+                <h2>Resualtados de busqueda por categoria</h2>
                 <!--searh-->
                 <article role="article">
                     <h2 class ="tituloBlog">Titulo del blog</h2>
@@ -51,7 +50,9 @@
                             <figcaption>Imagen que representa el contenido de este blog</figcaption>
                             <img>
                         </figure>    
-                        <li><button>LEER MÁS>></button></li>          
-        </section>
+                        <li><button>LEER MÁS>></button></li> 
+            </article>
+        </main> 
+    </div>
     </body>
 </html>
