@@ -27,6 +27,10 @@ html {
     box-sizing: inherit;
 }
 
+h2:hover {
+    color: gray;
+}
+
 body {
     color: #151413;
     margin: 0;
