@@ -3,14 +3,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <head>
+        <link rel="stylesheet" href="css/estilos.css">   
         <title>Pagina de Blog</title>
+
         <!-- [if lt  IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js>"
             </script>
         <![endif]-->
     </head>
     <body>
-        <header id="headerPrincipal" role="banner" >
+        <header id="headerPrincipal" role="banner" class = "contenedor" >
             <!--branding and navigation-->            
                 <h1>Sistema de gestions de blogs</h1>
                 <figure>
@@ -19,20 +21,20 @@
                 </figure>
                 <p>Slogan va a qui</p>            
            <h2>Menu</h2> 
-            <nav role="navigation">
+            <nav role="navigation" class="navegacion">
                 <ul>
                     <li><a href="PanelDeUsuario.html" title="Ve al tu pandel de usuario">Panel de de usuario</a></li>
                     <li><a href="PanelDeBlog.html" title="Ve al tu pandel de blog">Panel de de Blog</a></li>
                 </ul>              
             </nav>        
         </header>
-        <main id = "contenidoBlog" role="main">   
+        <main id = "contenidoBlog" role="main" class = "contenedor" >    
             <!--Main content-->         
             <article role="article">
                 <!--aqui va el contenido de la pagina-->  
             </article>
         </main>        
-        <section id="busqueda" role="search">
+        <section id="busqueda" role="search" class = "contenedor">
             <h2>Busqueda y blogs recientes</h2>
                 <!--searh-->
                 <form>

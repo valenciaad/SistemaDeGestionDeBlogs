@@ -3,6 +3,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <head>
+        <link rel="stylesheet" href="css/estilos.css"> 
         <title>Pagina de Blog</title>
         <!-- [if lt  IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js>"
@@ -10,7 +11,7 @@
         <![endif]-->
     </head>
     <body>
-        <header id="headerPrincipal" role="banner">
+        <header id="headerPrincipal" role="banner" class ="contenedor">
             <!--branding and navigation-->            
                 <h1>Sistema de gestions de blogs</h1>
                 <figure>
@@ -18,31 +19,32 @@
                     <img>
                 </figure>
                 <p>Slogan va a qui</p>            
-           <h2>Menu</h2> 
-            <nav role="navigation">
+            
+            <nav role="navigation" class="navegacion">
+            <h2>Menu</h2>
                 <ul>
-                    <li><a href="panelUsuario.html" title="Ve al tu pandel de usuario">Panel de de usuario</a></li>
-                    <li><a href="PanelDeBlog.html" title="Ve al tu pandel de blog">Panel de de Blog</a></li>
+                    <li class ="itemNavegacion"><a href="panelUsuario.html" title="Ve al tu pandel de usuario">Panel de usuario</a></li>
+                    <li class ="itemNavegacion"><a href="PanelDeBlog.html" title="Ve al tu pandel de blog">Panel de  Blog</a></li>
                 </ul>              
             </nav>        
-        </header>
-        <main id = "contenidoBlog" role="main">   
-            <!--Main content-->         
-            <article role="article">
-                <h2 class ="tituloBlog">Titulo del blog</h2>
-                <p>Contenido del blog...</p>                        
-               <figure>
-                    <figcaption>Imagen que representa el contenido de este blog</figcaption>
-                    <img>
-                </figure>
-                <section id = "comentarios">
+        </header>     
+                <main id = "contenidoBlog" role="main" class ="contenedor">  
+                    <!--Main content-->                
+                    <article role="article">
+                        <h2 class ="tituloBlog">Titulo del blog</h2>
+                        <p>Contenido del blog...</p>                        
+                    <figure>
+                            <figcaption>Imagen que representa el contenido de este blog</figcaption>
+                            <img>
+                        </figure>                        
+                </main>
+                <section class = "comentarios contenedor">
                     <!--comments-->
                     <h2>Comentarios:</h2>
                     <form >
-                        <label for="tComentario">Deja tu comentario</label>
-                        <textarea  name="tComentario" id="tComentario" placeholder="Escribe tu comentario ..."></textarea>
+                        <textarea  name="tComentario"  id="tComentario" placeholder="Escribe tu comentario ..."></textarea>
                         <br />
-                        <input type="submit" name="Comentar" value="Comentar" />
+                        <input type="submit" name="Comentar" value="Comentar" class="boton" />
                     </form>
                     <article class="comentario">
                         <h3>Comentario1</h3>
@@ -56,28 +58,27 @@
                     </article>
                 </section>
             </article>
-        </main>
-        <section id ="CEE">
+        <section class ="CEE contenedor" >
             <h2>Barra de herminetas</h2>
                 <!--tool bar-->
-                <ul>
+                <ul class="herramientas" >
                     <li><a href="crearBlog.html" title="Crea un nuevo Blog">Crear Blog</a></li>
                     <li><a href="crearBlog.html" title="Edita este Blog">Editar</a></li>
                     <li><a href="Eliminar.html" title="Elimina este blog">Eliminar</a></li>
                 </ul>
             
         </section>
-        <section id="busqueda" role="search">
+        <section id="busqueda" role="search" class ="contenedor">
             <h2>Busqueda y blogs recientes</h2>
                 <!--searh-->
                 <form>
                     <label for="Buscar">Buscar</label>
                     <input type="search" name="Buscar" id="Buscar" placeholder="Escribe una palabra clave ..." />
                     <br />
-                    <input type="submit" name="Buscar" value="Buscar" />
+                    <input type="submit" name="Buscar" value="Buscar" class="boton" />
                 </form>
-            <aside id="recientes">
-                <ul>
+            <aside >
+                <ul class="recientes">
                     <li><a href="paginaBlog.html" title="Ve al blog reciente 1">Reciente 1</a></li>
                     <li><a href="paginaBlog.html" title="Ve al blog reciente 2">Reciente 2</a></li>
                     <li><a href="paginaBlog.html" title="Ve al blog reciente 3">Reciente 3</a></li>
