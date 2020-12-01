@@ -19,23 +19,12 @@ https://coolors.co/d01137-f6faf0-0195b7-0075a2-151413
 
 html {
     box-sizing: border-box;
-<<<<<<< HEAD
 }
 
 *,
 *:before,
 *:after {
-=======
-    background-color: #F6FAF0;
-    
-  }
-  *, *:before, *:after {
->>>>>>> 4b1f233644f5f614a620691325c9b75bad212862
     box-sizing: inherit;
-}
-
-h2:hover {
-    color: gray;
 }
 
 body {
@@ -45,26 +34,10 @@ body {
     font-family: 'Helvetica', sans-serif;
     font-size: 15px;
     line-height: 1.5;
-    max-width: 90%;
-    margin: 0 auto;
-    
-  }
-  .contenedor {
-    text-align: center;
-    padding-bottom: 1px;
-    
-  }
-.input{
-
-}
-/* Grids
------------------------------*/  
-.grid3por2{
     display: grid;
     grid-template-columns: 1.3fr 0.7fr;
     grid-template-rows: 1fr 0.6fr 26.4% 5.8fr;
     gap: 1px 1px;
-<<<<<<< HEAD
     grid-template-areas: "header header" "main CEE" "main busqueda" "comentarios comentarios";
 }
 
@@ -72,38 +45,11 @@ body {
     text-align: center;
 }
 
-=======
-    grid-template-areas:
-    "header header"
-    "main CEE"
-    "main busqueda"
-    "comentarios comentarios";
-}
-.grid2por2 {
-    display: grid;
-    grid-template-columns: 1.4fr 0.6fr;
-    grid-template-rows: 0.4fr 1.6fr;
-    gap: 0px 0px;
-    grid-template-areas:
-      "header header"
-      "main busqueda";
-  }
-.grid2por1{
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.4fr 1.6fr;
-    gap: 0px 0px;
-    grid-template-areas:
-      "header"
-      "main";   
-}  
->>>>>>> 4b1f233644f5f614a620691325c9b75bad212862
 
 /*Navegacion
 -----------------------------------------------*/
 
 header {
-<<<<<<< HEAD
     grid-area: header;
     background: #4DA1A9;
     width: 100%;
@@ -115,23 +61,9 @@ header {
     margin: 0;
     padding: 0;
     display: flex;
-=======
-    grid-area: header; 
-    background: #0195B7;
-    width:100%;
-    
-}
- .navegacion ul {    
-    border: 1px solid #2E5077; 
-    list-style: none; 
-    margin: 0; 
-    padding: 0; 
-    display: flex; 
->>>>>>> 4b1f233644f5f614a620691325c9b75bad212862
     justify-content: center;
 }
 
-<<<<<<< HEAD
 .navegacion li {
     flex: 3;
 }
@@ -150,22 +82,6 @@ header {
 
 .navegacion a:hover {
     background: rgba(255, 166, 48, .8);
-=======
-.navegacion a { 
-    color: #151413; 
-    font-weight: 300; 
-    letter-spacing: 2px; 
-    text-decoration: none; 
-    background:#0075A2; 
-    padding: 20px 5px; 
-    display: inline-block; 
-    width: 100%; 
-    text-align: center; 
-}
-
-.navegacion a:hover { 
-    background: rgba(208, 17, 55, .8); 
->>>>>>> 4b1f233644f5f614a620691325c9b75bad212862
 }
 
 
@@ -222,27 +138,15 @@ main {
 #busqueda {
     background: #2E5077;
     grid-area: busqueda;
-<<<<<<< HEAD
-=======
-    overflow: auto;
-    
->>>>>>> 4b1f233644f5f614a620691325c9b75bad212862
 }
 
 .recientes {
     margin: auto 10%;
     text-align: left;
-<<<<<<< HEAD
     list-style: none;
     background: #D7E8BA;
     border: 1px solid #2E5077;
     box-shadow: 0 0 10px #000000;
-=======
-    list-style: none; 
-    background: #F6FAF0;
-    border: 1px solid #2E5077;    
-    box-shadow: 0 0 10px #000000;    
->>>>>>> 4b1f233644f5f614a620691325c9b75bad212862
 }
 
 .herramientas {
@@ -251,7 +155,6 @@ main {
     padding: 0;
     display: flex;
     justify-content: center;
-<<<<<<< HEAD
 }
 
 .herramientas li {
@@ -288,27 +191,3 @@ main {
     border: 1px solid #0195B7;
     border-radius: 30px
 }
-=======
- }
- .herramientas li{
-    flex: 3; 
-}
-.herramientas a{
-  color: #F7FFF7;
-  background: #2F3061;
-  text-decoration: none;
-  padding: 8px;
-  border-radius: 4px;
-  display: inline-block;
-}
-.boton{
-  color: #F7FFF7;
-  background: #2F3061;
-  text-decoration: none;
-  padding: 8px;
-  border-radius: 4px;
-  display: inline-block
-    
-}
-
->>>>>>> 4b1f233644f5f614a620691325c9b75bad212862
