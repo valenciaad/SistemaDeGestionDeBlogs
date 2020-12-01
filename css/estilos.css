@@ -8,21 +8,24 @@ https://coolors.co/d01137-f6faf0-0195b7-0075a2-151413
 #151413 - Smoky Black
 */
 
+
 /*fuentes
 'Helvetica', sans-serif;
 ------------------------------------*/
 
 
-
 /* Estilos globales
 ------------------------------------*/
+
 html {
     box-sizing: border-box;
-    
-  }
-  *, *:before, *:after {
+}
+
+*,
+*:before,
+*:after {
     box-sizing: inherit;
-  }
+}
 
 body {
     color: #151413;
@@ -33,53 +36,52 @@ body {
     line-height: 1.5;
     display: grid;
     grid-template-columns: 1.3fr 0.7fr;
-    grid-template-rows: 1fr  0.6fr 26.4% 5.8fr;
+    grid-template-rows: 1fr 0.6fr 26.4% 5.8fr;
     gap: 1px 1px;
-    grid-template-areas:
-    "header header"
-    "main CEE"
-    "main busqueda"
-    "comentarios comentarios";
+    grid-template-areas: "header header" "main CEE" "main busqueda" "comentarios comentarios";
+}
 
-
-  }
 .contenedor {
     text-align: center;
-  }
+}
+
+
 /*Navegacion
 -----------------------------------------------*/
+
 header {
-    grid-area: header; 
+    grid-area: header;
     background: #4DA1A9;
-    width:100%;
-    
+    width: 100%;
 }
- .navegacion ul {    
-    border: 1px solid #2E5077; 
-    list-style: none; 
-    margin: 0; 
-    padding: 0; 
-    display: flex; 
+
+.navegacion ul {
+    border: 1px solid #2E5077;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
     justify-content: center;
- }
- .navegacion li {
-    flex: 3; 
 }
 
-.navegacion a { 
-    color: #151413; 
-    font-weight: 300; 
-    letter-spacing: 2px; 
-    text-decoration: none; 
-    background:#D7E8BA; 
-    padding: 20px 5px; 
-    display: inline-block; 
-    width: 100%; 
-    text-align: center; 
+.navegacion li {
+    flex: 3;
 }
 
-.navegacion a:hover { 
-    background: rgba(255, 166, 48, .8); 
+.navegacion a {
+    color: #151413;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-decoration: none;
+    background: #D7E8BA;
+    padding: 20px 5px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.navegacion a:hover {
+    background: rgba(255, 166, 48, .8);
 }
 
 
@@ -93,80 +95,90 @@ main {
     margin: 0;
 }
 
-.comentarios{
+.comentarios {
     grid-area: comentarios;
     background-color: #4DA1A9;
 }
 
+
 /*Barra de herminetas
 ----------------------------------*/
-.CEE {    
+
+.CEE {
     background: #FFA630;
     grid-area: CEE;
 }
-.CEE a:hover { 
-    background: rgba(21, 20, 19, .8); 
+
+.CEE a:hover {
+    background: rgba(21, 20, 19, .8);
 }
+
+
 /* Comentarios
 ---------------------------------------*/
-#tComentario{
+
+#tComentario {
     width: 40%;
     height: 100px;
     padding: 10px;
     border-left: 6px solid #2E5077;
     background-color: #D7E8BA;
     font: 1.4em/1.6em cursive;
-    color:#2E5077;
-
+    color: #2E5077;
 }
 
-.comentario{
+.comentario {
     background-color: #D7E8BA;
-    
 }
+
 
 /* Busqueda y blogs recientes
 ----------------------------------*/
 
-#busqueda{
+#busqueda {
     background: #2E5077;
     grid-area: busqueda;
-    
 }
+
 .recientes {
-    margin: auto 10% ;
+    margin: auto 10%;
     text-align: left;
-    list-style: none; 
+    list-style: none;
     background: #D7E8BA;
-    border: 1px solid #2E5077;    
+    border: 1px solid #2E5077;
     box-shadow: 0 0 10px #000000;
 }
 
-
-.herramientas {    
-    list-style: none; 
-    margin: 0; 
-    padding: 0; 
-    display: flex; 
+.herramientas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
     justify-content: center;
- }
- .herramientas li{
-    flex: 3; 
 }
-.herramientas a{
-  color: #F7FFF7;
-  background: #2F3061;
-  text-decoration: none;
-  padding: 8px;
-  border-radius: 4px;
-  display: inline-block;
+
+.herramientas li {
+    flex: 3;
 }
-.boton{
-  color: #F7FFF7;
-  background: #2F3061;
-  text-decoration: none;
-  padding: 8px;
-  border-radius: 4px;
-  display: inline-block
-    
+
+.herramientas a {
+    color: #F7FFF7;
+    background: #2F3061;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.boton {
+    background-color: #0195B7;
+    /* Green blue */
+    border: none;
+    color: #7c7c7c;
+    padding: 8px 25px;
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }
