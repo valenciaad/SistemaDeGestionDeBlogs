@@ -4,13 +4,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <head>
         <title>Crear Blog</title>
+        <link rel="stylesheet" href="css/estilos.css"> 
         <!-- [if lt  IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js>"
             </script>
         <![endif]-->
     </head>
-    <body>
-        <header id="headerPrincipal" role="banner" >
+    <body class ="grid2por2">
+     
+        <header id="headerPrincipal" role="banner" class ="contenedor" >
             <!--branding and navigation-->            
                 <h1>Sistema de gestions de blogs</h1>
                 <figure>
@@ -19,14 +21,14 @@
                 </figure>
                 <p>Slogan va a qui</p>            
            <h2>Menu</h2> 
-            <nav role="navigation">
+            <nav role="navigation"  class="navegacion">
                 <ul>
                     <li><a href="panelUsuario.html" title="Ve al tu pandel de usuario">Panel de de usuario</a></li>
                     <li><a href="panelBlog.html" title="Ve al tu pandel de blog">Panel de de Blog</a></li>
                 </ul>              
             </nav>        
         </header>
-        <main id = "contenidoBlog" role="main">   
+        <main id = "contenidoBlog" role="main"  class ="contenedor">   
             <!--Main content-->         
             <article role="article">
                 <!--aqui va el contenido de la pagina-->  
@@ -49,22 +51,31 @@
             </form>
             </article>
         </main>        
-        <section id="busqueda" role="search">
+        <section id="busqueda" role="search" class ="contenedor">
             <h2>Busqueda y blogs recientes</h2>
                 <!--searh-->
                 <form>
                     <label for="Buscar">Buscar</label>
                     <input type="search" name="Buscar" id="Buscar" placeholder="Escribe una palabra clave ..." />
                     <br />
-                    <input type="submit" name="Buscar" value="Buscar" />
+                    <input type="submit" name="Buscar" value="Buscar" class="boton" />
                 </form>
-            <aside id="recientes">
-                <ul>
-                    <li><a href="paginaBlog.html" title="Ve al blog reciente 1">Reciente 1</a></li>
-                    <li><a href="paginaBlog.html" title="Ve al blog reciente 2">Reciente 2</a></li>
-                    <li><a href="paginaBlog.html" title="Ve al blog reciente 3">Reciente 3</a></li>
+            <aside >
+                <ul class="recientes">
+                    <li><a href="paginaBlog.html" title="Ve al blog reciente 1"><h3>Reciente 1</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p></a></li>
+                    <li><a href="paginaBlog.html" title="Ve al blog reciente 1"><h3>Reciente 1</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p></a></li>
+                    <li><a href="paginaBlog.html" title="Ve al blog reciente 1"><h3>Reciente 1</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </p></a></li>
                 </ul>
             </aside>
-        </section>
+        </section> 
+      
     </body>
 </html>

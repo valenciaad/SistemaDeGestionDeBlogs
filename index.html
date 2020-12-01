@@ -4,11 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css"> 
     <title>Inicio de sesión</title>
+    <!-- [if lt  IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js>"
+            </script>
+        <![endif]-->
 </head>
 
-<body>
-    <header id="headerPrincipal" role="banner">
+<body class = grid2por1>
+    <header id="headerPrincipal" role="banner" class ="contenedor">
         <h1>Sistema de gestions de blogs</h1>
         <figure>
             <figcaption>Logo del Blog</figcaption>
@@ -16,7 +21,7 @@
         </figure>
         <p>Slogan va a qui</p>
     </header>
-    <main id="contenidoBlog" role="main">
+    <main id="contenidoBlog" role="main" class ="contenedor">
         <h2>Bienvenido</h2>
         <article role="article">
             <form action="">
@@ -30,17 +35,6 @@
             <a href="">Crear una</a>
         </article>
     </main>
-    <section id="busqueda" role="search">
-        <h2>
-            <!--searh-->
-            <form>
-                <label for="Buscar">Buscar</label>
-                <input type="search" name="Buscar" id="Buscar" placeholder="Escribe una palabra clave ..." />
-                <br />
-                <input type="submit" name="Buscar" value="Buscar" />
-            </form>
-        </h2>
-    </section>
 </body>
 
 </html>
