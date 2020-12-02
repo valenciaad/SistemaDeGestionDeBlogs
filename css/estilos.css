@@ -34,11 +34,9 @@ body {
     font-family: 'Helvetica', sans-serif;
     font-size: 15px;
     line-height: 1.5;
-    display: grid;
-    grid-template-columns: 1.3fr 0.7fr;
-    grid-template-rows: 1fr 0.6fr 26.4% 5.8fr;
-    gap: 1px 1px;
-    grid-template-areas: "header header" "main CEE" "main busqueda" "comentarios comentarios";
+    max-width: 90%;
+    margin: 0 auto;
+    
 }
 
 .contenedor {
@@ -53,6 +51,7 @@ header {
     grid-area: header;
     background: #4DA1A9;
     width: 100%;
+    grid-area: header;
 }
 
 .navegacion ul {
@@ -84,6 +83,35 @@ header {
     background: rgba(255, 166, 48, .8);
 }
 
+/*Grids
+----------------------------------*/
+.grid2por1{    
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.4fr 1.6fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "header"
+      "main";
+  }
+.grid2por2{
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    grid-template-rows: 0.4fr 1.6fr;
+    gap: 0px 0px;
+    grid-template-areas:
+    "header header"
+    "main busqueda";
+ } 
+ .grid3por2{
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    grid-template-rows: 1fr 0.6fr 26.4% 5.8fr;
+    gap: 1px 1px;
+    grid-template-areas: "header header" "main CEE" "main busqueda" "comentarios comentarios";
+
+} 
+
 
 /* Main
 ---------------------------------*/
@@ -93,6 +121,7 @@ main {
     padding: 10px;
     grid-area: main;
     margin: 0;
+    grid-area: main;
 }
 
 .comentarios {
