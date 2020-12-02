@@ -151,7 +151,7 @@ main {
 }
 
  a:hover {
-  background: rgba(208, 17, 55, 0.8);
+  background: rgba(0, 117, 162, 0.8);
   
 }
 .CEE h2{
@@ -314,4 +314,19 @@ select {
   background-image: linear-gradient(to top, #0075a2, #f6faf0 15%);
   margin-bottom: 20px;
 
+}
+/* mis blogs
+--------------------------*/
+.misBlogs{
+   border: 2px inset #0075a2; 
+   list-style: none;
+
+}
+
+.misBlogs li{
+  margin: 5%;
+}
+.misBlogs a{
+ padding: 15px 35%;
+ 
 }
