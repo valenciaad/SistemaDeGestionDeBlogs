@@ -31,7 +31,7 @@ body {
     color: #151413;
     margin: 0;
     padding: 0;
-    font-family: 'Helvetica', sans-serif;
+    font-family: Monserrat, Helvetica, sans-serif;
     font-size: 15px;
     line-height: 1.5;
     max-width: 90%;
@@ -210,4 +210,10 @@ input {
     border-bottom:1px solid #ccc;
     width:30%
 }
-
+/*entra de blog
+------------------------------------*/
+.inputBlog{
+    width:80%;
+    height:50%;
+    border: 2px solid #D01137;
+}
