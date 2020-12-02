@@ -14,6 +14,8 @@ https://coolors.co/d01137-f6faf0-0195b7-0075a2-151413
 
 /* Estilos globales
 ------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
 
 html {
   box-sizing: border-box;
@@ -29,16 +31,14 @@ body {
     color: #151413;
     margin: 0;
     padding: 0;
-    font-family: Monserrat, Helvetica, sans-serif;
+    font-family: "Roboto"/*Monserrat, Helvetica, sans-serif*/;
     font-size: 15px;
     line-height: 1.5;
     max-width: 90%;
     margin: 0 auto;
     background: #F6FAF0;
     border: 1px solid #D01137;
-    box-shadow: 0 0 10px #000000;
-    
-    
+    box-shadow: 0 0 10px #000000;   
 }
 
 .contenedor {
