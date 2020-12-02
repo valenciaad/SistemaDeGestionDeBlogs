@@ -52,10 +52,14 @@ body {
 -----------------------------------------------*/
 
 header {
-  grid-area: header;
-  background: #f6faf0;
+  grid-area: header;  
   padding: 1px;
   margin: 1px;
+  background-image:  url("../imagenes/logoyslogan.png");  
+  background-position: top left;
+  background-repeat: no-repeat;
+  
+ 
 }
 
 .navegacion ul {
