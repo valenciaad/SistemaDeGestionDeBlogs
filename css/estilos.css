@@ -134,7 +134,9 @@ main {
     grid-area: main;
     margin: 0;
     grid-area: main;
-    margin: 5%;
+    margin: 1%;
+    border: 2px inset #0075a2;
+
 }
 
 
@@ -191,7 +193,13 @@ main {
   grid-area: busqueda;
   overflow: auto;
 }
-
+#Buscar{
+  width: auto;
+}
+.barraBusqueda input[type="submit"]{
+  width: auto;
+  
+}
 .recientes {
   margin: auto 10%;
   text-align: left;
