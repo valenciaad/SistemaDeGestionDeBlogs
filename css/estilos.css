@@ -51,7 +51,7 @@ body {
 header {
   grid-area: header;  
   padding: 1px;
-  background-image:  url("../imagenes/logoyslogan.png");  
+  background-image:  url("../imagenes/logoyslogan.jpg");  
   background-position: center bottom;
   background-repeat: no-repeat; 
   background-size: cover; 
