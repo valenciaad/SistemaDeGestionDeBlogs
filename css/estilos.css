@@ -8,22 +8,24 @@ https://coolors.co/d01137-f6faf0-0195b7-0075a2-151413
 #151413 - Smoky Black
 */
 
+
 /*fuentes
 'Helvetica', sans-serif;
 ------------------------------------*/
 
 
-
 /* Estilos globales
 ------------------------------------*/
+
 html {
     box-sizing: border-box;
-    background-color: #F6FAF0;
-    
-  }
-  *, *:before, *:after {
+}
+
+*,
+*:before,
+*:after {
     box-sizing: inherit;
-  }
+}
 
 body {
     color: #151413;
@@ -32,84 +34,54 @@ body {
     font-family: 'Helvetica', sans-serif;
     font-size: 15px;
     line-height: 1.5;
-    max-width: 90%;
-    margin: 0 auto;
-    
-  }
-  .contenedor {
-    text-align: center;
-    padding-bottom: 1px;
-    
-  }
-.input{
-
-}
-/* Grids
------------------------------*/  
-.grid3por2{
     display: grid;
     grid-template-columns: 1.3fr 0.7fr;
-    grid-template-rows: 1fr  0.6fr 26.4% 5.8fr;
+    grid-template-rows: 1fr 0.6fr 26.4% 5.8fr;
     gap: 1px 1px;
-    grid-template-areas:
-    "header header"
-    "main CEE"
-    "main busqueda"
-    "comentarios comentarios";
+    grid-template-areas: "header header" "main CEE" "main busqueda" "comentarios comentarios";
 }
-.grid2por2 {
-    display: grid;
-    grid-template-columns: 1.4fr 0.6fr;
-    grid-template-rows: 0.4fr 1.6fr;
-    gap: 0px 0px;
-    grid-template-areas:
-      "header header"
-      "main busqueda";
-  }
-.grid2por1{
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.4fr 1.6fr;
-    gap: 0px 0px;
-    grid-template-areas:
-      "header"
-      "main";   
-}  
+
+.contenedor {
+    text-align: center;
+}
+
 
 /*Navegacion
 -----------------------------------------------*/
+
 header {
-    grid-area: header; 
-    background: #0195B7;
-    width:100%;
-    
+    grid-area: header;
+    background: #4DA1A9;
+    width: 100%;
 }
- .navegacion ul {    
-    border: 1px solid #2E5077; 
-    list-style: none; 
-    margin: 0; 
-    padding: 0; 
-    display: flex; 
+
+.navegacion ul {
+    border: 1px solid #2E5077;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
     justify-content: center;
- }
- .navegacion li {
-    flex: 3; 
 }
 
-.navegacion a { 
-    color: #151413; 
-    font-weight: 300; 
-    letter-spacing: 2px; 
-    text-decoration: none; 
-    background:#0075A2; 
-    padding: 20px 5px; 
-    display: inline-block; 
-    width: 100%; 
-    text-align: center; 
+.navegacion li {
+    flex: 3;
 }
 
-.navegacion a:hover { 
-    background: rgba(208, 17, 55, .8); 
+.navegacion a {
+    color: #151413;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-decoration: none;
+    background: #D7E8BA;
+    padding: 20px 5px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.navegacion a:hover {
+    background: rgba(255, 166, 48, .8);
 }
 
 
@@ -123,82 +95,67 @@ main {
     margin: 0;
 }
 
-.comentarios{
+.comentarios {
     grid-area: comentarios;
     background-color: #4DA1A9;
 }
 
+
 /*Barra de herminetas
 ----------------------------------*/
-.CEE {    
-    background: #0195B7;
+
+.CEE {
+    background: #FFA630;
     grid-area: CEE;
 }
-.CEE a:hover { 
-    background: rgba(21, 20, 19, .8); 
+
+.CEE a:hover {
+    background: rgba(21, 20, 19, .8);
 }
+
+
 /* Comentarios
 ---------------------------------------*/
-#tComentario{
+
+#tComentario {
     width: 40%;
     height: 100px;
     padding: 10px;
     border-left: 6px solid #2E5077;
     background-color: #D7E8BA;
     font: 1.4em/1.6em cursive;
-    color:#2E5077;
-
+    color: #2E5077;
 }
 
-.comentario{
+.comentario {
     background-color: #D7E8BA;
-    
 }
+
 
 /* Busqueda y blogs recientes
 ----------------------------------*/
 
-#busqueda{
+#busqueda {
     background: #2E5077;
     grid-area: busqueda;
     overflow: auto;    
 }
+
 .recientes {
-    margin: auto 10% ;
+    margin: auto 10%;
     text-align: left;
-    list-style: none; 
-    background: #F6FAF0;
-    border: 1px solid #2E5077;    
-    box-shadow: 0 0 10px #000000;    
+    list-style: none;
+    background: #D7E8BA;
+    border: 1px solid #2E5077;
+    box-shadow: 0 0 10px #000000;
 }
 
-
-.herramientas {    
-    list-style: none; 
-    margin: 0; 
-    padding: 0; 
-    display: flex; 
+.herramientas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
     justify-content: center;
- }
- .herramientas li{
-    flex: 3; 
-}
-.herramientas a{
-  color: #F7FFF7;
-  background: #2F3061;
-  text-decoration: none;
-  padding: 8px;
-  border-radius: 4px;
-  display: inline-block;
-}
-.boton{
-  color: #F7FFF7;
-  background: #2F3061;
-  text-decoration: none;
-  padding: 8px;
-  border-radius: 4px;
-  display: inline-block
-    
 }
 
 input {

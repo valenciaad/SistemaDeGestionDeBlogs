@@ -10,6 +10,7 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js>"
             </script>
         <![endif]-->
+    <link rel="stylesheet" href="css/estilos.css" />
 </head>
 
 <body class ="grid2por2">
@@ -58,8 +59,9 @@
             <li><a href="blog.html">Blog #4</a></li>
             <li><a href="blog.html">Blog #5</a></li>
         </ul>
+
         <!--Lista de los blogs en el orden seleccionado-->
-        <h3>Mis favoritos</h3>
+        <h3 class="titulo">Mis favoritos</h3>
         <ol>
             <li><a href="blog.html">Blog favorito #1</a></li>
             <li><a href="blog.html">Blog favorito #2</a></li>
@@ -72,26 +74,19 @@
 
     <section id="busqueda" role="search" class ="contenedor">
         <h2>Busqueda y blogs recientes</h2>
-            <!--searh-->
-            <form>
-                <label for="Buscar">Buscar</label>
-                <input type="search" name="Buscar" id="Buscar" placeholder="Escribe una palabra clave ..." />
-                
-                <input type="submit" name="Buscar" value="Buscar" class="boton" />
-            </form>
-        <aside >
-            <ul class="recientes">
-                <li><a href="paginaBlog.html" title="Ve al blog reciente 1"><h3>Reciente 1</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p></a></li>
-                <li><a href="paginaBlog.html" title="Ve al blog reciente 1"><h3>Reciente 1</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p></a></li>
-                <li><a href="paginaBlog.html" title="Ve al blog reciente 1"><h3>Reciente 1</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </p></a></li>
+        <!--searh-->
+        <form>
+            <label for="Buscar"></label>
+            <!--a href="#" class="button"></a-->
+            <input type="search" class="buscar" name="Buscar" id="Buscar" placeholder="Escribe una palabra clave ..." />
+
+            <input type="submit" class=boton name="Buscar" value="Buscar" />
+        </form>
+        <aside id="recientes">
+            <ul>
+                <li><a href="paginaBlog.html" title="Ve al blog reciente 1">Reciente 1</a></li>
+                <li><a href="paginaBlog.html" title="Ve al blog reciente 2">Reciente 2</a></li>
+                <li><a href="paginaBlog.html" title="Ve al blog reciente 3">Reciente 3</a></li>
             </ul>
         </aside>
     </section> 
