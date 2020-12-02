@@ -36,11 +36,16 @@ body {
     line-height: 1.5;
     max-width: 90%;
     margin: 0 auto;
+    background: #F6FAF0;
+    border: 1px solid #D01137;
+    box-shadow: 0 0 10px #000000;
     
 }
 
 .contenedor {
     text-align: center;
+    border-style: inset;
+    border-color: #0195B7;
 }
 
 
@@ -48,14 +53,15 @@ body {
 -----------------------------------------------*/
 
 header {
+    
     grid-area: header;
-    background: #4DA1A9;
+    background: #F6FAF0;
     padding: 1px;
     margin: 1px;
 }
 
 .navegacion ul {
-    border: 1px solid #404244;
+    border: 1px solid #151413;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -72,7 +78,7 @@ header {
     font-weight: 300;
     letter-spacing: 2px;
     text-decoration: none;
-    background: #D7E8BA;
+    background:#0195B7;
     padding: 20px 5px;
     display: inline-block;
     width: 100%;
@@ -80,7 +86,7 @@ header {
 }
 
 .navegacion a:hover {
-    background: rgba(255, 166, 48, .8);
+    background: rgba(208, 17, 55, .8);
 }
 
 /*Grids
@@ -106,8 +112,8 @@ header {
  
  .grid3por2{
     display: grid;
-    grid-template-columns: 1.4fr 0.6fr;
-    grid-template-rows: 0.1fr 0.1fr 1.2fr 1.4fr;
+    grid-template-columns: 1.3fr 0.7fr;
+    grid-template-rows: 0.1fr 0.1fr 1fr 1.9f;
     gap: 0px 0px;
     grid-template-areas:
       "header header"
@@ -121,7 +127,7 @@ header {
 ---------------------------------*/
 
 main {
-    background: #D7E8BA;
+    background: #0075A2;
     padding: 10px;
     grid-area: main;
     margin: 0;
@@ -130,7 +136,7 @@ main {
 
 .comentarios {
     grid-area: comentarios;
-    background-color: #4DA1A9;
+    background-color: #0195B7;
 }
 
 
@@ -138,12 +144,13 @@ main {
 ----------------------------------*/
 
 .CEE {
-    background: #FFA630;
+    background: #151413;
     grid-area: CEE;
+    color: #F6FAF0;
 }
 
 .CEE a:hover {
-    background: rgba(21, 20, 19, .8);
+    background: rgba(208, 17, 55, .8);
 }
 
 
@@ -154,14 +161,19 @@ main {
     width: 40%;
     height: 100px;
     padding: 10px;
-    border-left: 6px solid #2E5077;
-    background-color: #D7E8BA;
+    border-left: 6px solid #151413;
+    background-color: #F6FAF0;
     font: 1.4em/1.6em cursive;
-    color: #2E5077;
+    color: #151413;
 }
 
 .comentario {
-    background-color: #D7E8BA;
+    background-color: #0075A2;
+    width: 50%;
+    margin: 20px auto;
+    border: 1px solid #2E5077;
+    box-shadow: 0 0 10px #000000;
+    overflow: auto;
 }
 
 
@@ -169,7 +181,7 @@ main {
 ----------------------------------*/
 
 #busqueda {
-    background: #2E5077;
+    background: #0195B7;
     grid-area: busqueda;
     overflow: auto;    
 }
@@ -178,9 +190,10 @@ main {
     margin: auto 10%;
     text-align: left;
     list-style: none;
-    background: #D7E8BA;
+    background: #F6FAF0;
     border: 1px solid #2E5077;
     box-shadow: 0 0 10px #000000;
+    overflow: auto;
 }
 
 .herramientas {

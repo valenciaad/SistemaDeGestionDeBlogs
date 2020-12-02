@@ -12,7 +12,7 @@
     </head>
     <body class ="grid2por2">
         
-        <header id="headerPrincipal" role="banner" >
+        <header id="headerPrincipal" role="banner" class ="contenedor">
             <!--branding and navigation-->            
                 <h1>Sistema de gestions de blogs</h1>
                 <figure>
@@ -28,7 +28,7 @@
                 </ul>              
             </nav>        
         </header>
-        <main id = "contenidoBlog" role="main">   
+        <main id = "contenidoBlog" role="main" class ="contenedor">   
             <!--Main content-->         
             <article role="list">
                 <!--aqui va el contenido de la pagina-->  
@@ -43,12 +43,14 @@
         <section id="busqueda" role="search" class ="contenedor">
             <h2>Busqueda y blogs recientes</h2>
                 <!--searh-->
+                <div class ="barraBusqueda">
                 <form>
                     <label for="Buscar">Buscar</label>
                     <input type="search" name="Buscar" id="Buscar" placeholder="Escribe una palabra clave ..." />
-                    
-                    <input type="submit" name="Buscar" value="Buscar" class="boton" />
+                
+                    <input type="submit" name="Buscar" value="Buscar" />
                 </form>
+            </div>
             <aside >
                 <ul class="recientes">
                     <li><a href="paginaBlog.html" title="Ve al blog reciente 1"><h3>Reciente 1</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
@@ -64,6 +66,6 @@
                         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  </p></a></li>
                 </ul>
             </aside>
-        </section> 
+        </section>
     </body>
 </html>
