@@ -52,8 +52,9 @@ header {
   grid-area: header;  
   padding: 1px;
   background-image:  url("../imagenes/logoyslogan.png");  
-  background-position: top left;
+  background-position: center top;
   background-repeat: no-repeat; 
+  background-size: cover;
 }
 
 header h2, h1 {
@@ -85,6 +86,7 @@ header h2, h1 {
 
 .navegacion a:hover {
   background: rgba(0, 117, 162, 0.8);
+  color:  #F6FAF0;
 }
 
 /*Grids
@@ -131,10 +133,7 @@ main {
     grid-area: main;
 }
 
-.comentarios {
-  grid-area: comentarios;
-  background-color: #0195b7;
-}
+
 
 /*Barra de herminetas
 ----------------------------------*/
@@ -145,8 +144,12 @@ main {
   color: #f6faf0;
 }
 
-.CEE a:hover {
+ a:hover {
   background: rgba(208, 17, 55, 0.8);
+  
+}
+.CEE h2{
+  font-size: 0;
 }
 
 /* Comentarios
@@ -160,6 +163,7 @@ main {
   background-color: #f6faf0;
   font: 1.4em/1.6em cursive;
   color: #151413;
+  margin-bottom: 10px;
 }
 
 .comentario {
@@ -169,6 +173,10 @@ main {
   border: 1px solid #2e5077;
   box-shadow: 0 0 10px #000000;
   overflow: auto;
+}
+.comentarios {
+  grid-area: comentarios;
+  background-color: #0195b7;
 }
 
 /* Busqueda y blogs recientes
@@ -190,12 +198,39 @@ main {
   overflow: auto;
 }
 
-.herramientas {
+.recientes p{
+  margin-right: 5%;
+  text-align: justify;
+  padding: 2px;
+  background: rgba(0, 117, 162, 0.2);
+}
+
+
+.herramientas  {
+  
   list-style: none;
-  margin: 0;
+  margin-bottom: 10px;
   padding: 0;
   display: flex;
   justify-content: center;
+}
+
+.herramientas li{
+  flex: 3;  
+}
+
+.herramientas a{
+  color: #F6FAF0;
+  letter-spacing: 2px;
+  text-decoration: none;
+  padding: 20px 5px;
+  display: inline-block;
+  text-align: center;
+  
+}
+.herramientas a:hover {
+  background: rgba(0, 117, 162, 0.8);
+  color:  #F6FAF0;
 }
 
 input {
