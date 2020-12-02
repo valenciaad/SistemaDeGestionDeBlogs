@@ -1,59 +1,79 @@
-<!DOCTYPE >
+<!DOCTYPE>
 <html lang="es">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <head>
-        <link rel="stylesheet" href="css/estilos.css"> 
-        <title>Resultados de busqueda</title>
-        <!-- [if lt  IE 9]>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Resultados de busqueda</title>
+    <!-- [if lt  IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js>"
             </script>
         <![endif]-->
-    </head>
-    <body>
-    <div class = grid2por1></div>
-        <header id="headerPrincipal" role="banner" class ="contenedor" >
-            <!--branding and navigation-->            
-               
-                <figure>
-                    <figcaption>Logo del Blog</figcaption>
-                    <img>
-                </figure>
-                <p>Slogan va aqui</p>            
-           <h2>Menu</h2> 
-           <nav role="navigation" class="navegacion">
+</head>
+
+<body>
+    <div class=grid2por1></div>
+    <header id="headerPrincipal" role="banner" class="contenedor">
+        <!--branding and navigation-->
+
+        <figure>
+            <figcaption>Logo del Blog</figcaption>
+            <img src="imagenes/logoyslogan.png">
+        </figure>
+        <p>Slogan va aqui</p>
+        <nav role="navigation" class="navegacion">
             <h2>Menu</h2>
-                <ul>
-                    <li class ="itemNavegacion"><a href="panelUsuario.html" title="Ve al tu pandel de usuario">Panel de usuario</a></li>
-                    <li class ="itemNavegacion"><a href="PanelDeBlog.html" title="Ve al tu pandel de blog">Panel de  Blog</a></li>
-                </ul>              
-            </nav>         
-        </header>
-        <main id = "contenidoBlog" role="main" class ="contenedor" class ="contenedor">   
-            <!--Main content-->         
+            <ul>
+                <li class="itemNavegacion"><a href="panelUsuario.html" title="Ve al tu pandel de usuario">Panel de
+                        usuario</a></li>
+                <li class="itemNavegacion"><a href="PanelDeBlog.html" title="Ve al tu pandel de blog">Panel de Blog</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main id="contenidoBlog" role="main" class="contenedor" class="contenedor">
+        <!--Main content-->
+        <article role="article">
+            <!--aqui va el contenido de la pagina-->
+            <h2>Resultados de búsqueda por categoria</h2>
+            <!--searh-->
             <article role="article">
-                <!--aqui va el contenido de la pagina-->  
-                <h2>Resualtados de busqueda por categoria</h2>
                 <!--searh-->
                 <article role="article">
-                    <h2 class ="tituloBlog">Titulo del blog</h2>
-                    <p>Contenido del blog...</p>                        
-                   <figure>
-                        <figcaption>Imagen que representa el contenido de este blog</figcaption>
-                        <img>
-                    </figure>
-                    <li><button>LEER MÁS>></button></li>
-                    
-                    <article role="article">
-                        <h2 class ="tituloBlog">Titulo del blog</h2>
-                        <p>Contenido del blog...</p>                        
-                       <figure>
-                            <figcaption>Imagen que representa el contenido de este blog</figcaption>
-                            <img>
-                        </figure>    
-                        <li><button>LEER MÁS>></button></li> 
-            </article>
-        </main> 
+                    <div class="grid1x2">
+                        <div class="imagen1x2">
+                            <figure class="figbusqueda">
+                                <figcaption>Imagen que representa el contenido de este blog
+                                </figcaption>
+                                <img class="scaled" src="imagenes/technologymonitoring.jpg">
+                            </figure>
+                        </div>
+                        <div class="texto1x2">
+                            <h2 class="tituloBlog">Título del blog</h2>
+                            <p>Descripción general del blog...</p>
+                            <li><button>LEER MÁS>></button></li>
+                        </div>
+                    </div>
+                </article>
+                <article role="article">
+                    <div class="grid1x2">
+                        <div class="imagen1x2">
+                            <figure class="figbusqueda">
+                                <figcaption>Imagen que representa el contenido de este blog
+                                </figcaption>
+                                <img class="scaled" src="imagenes/webline-coding-html.jpg">
+                            </figure>
+                        </div>
+                        <div class="texto1x2">
+                            <h2 class="tituloBlog">Título del blog</h2>
+                            <p>Descripción general del blog...</p>
+                            <li><button>LEER MÁS>></button></li>
+                        </div>
+                    </div>
+                </article>
+    </main>
     </div>
-    </body>
+</body>
+
 </html>
