@@ -54,7 +54,7 @@ header {
   background-image:  url("../imagenes/logoyslogan.png");  
   background-position: center top;
   background-repeat: no-repeat; 
-  background-size: cover;
+  
 }
 
 header h2, h1 {
@@ -133,6 +133,7 @@ main {
     grid-area: main;
     margin: 0;
     grid-area: main;
+    margin: 5%;
 }
 
 
