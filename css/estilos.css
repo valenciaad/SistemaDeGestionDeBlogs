@@ -131,7 +131,7 @@ main {
 /*Barra de herminetas
 ----------------------------------*/
 .CEE {    
-    background: #FFA630;
+    background: #0195B7;
     grid-area: CEE;
 }
 .CEE a:hover { 
@@ -161,8 +161,7 @@ main {
 #busqueda{
     background: #2E5077;
     grid-area: busqueda;
-    overflow: auto;
-    
+    overflow: auto;    
 }
 .recientes {
     margin: auto 10% ;
@@ -200,5 +199,12 @@ main {
   border-radius: 4px;
   display: inline-block
     
+}
+
+input {
+    padding:8px;
+    border:none;
+    border-bottom:1px solid #ccc;
+    width:30%
 }
 
