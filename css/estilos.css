@@ -50,12 +50,12 @@ body {
 header {
     grid-area: header;
     background: #4DA1A9;
-    width: 100%;
-    grid-area: header;
+    padding: 1px;
+    margin: 1px;
 }
 
 .navegacion ul {
-    border: 1px solid #2E5077;
+    border: 1px solid #404244;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -103,14 +103,18 @@ header {
     "header header"
     "main busqueda";
  } 
+ 
  .grid3por2{
     display: grid;
-    grid-template-columns: 1.3fr 0.7fr;
-    grid-template-rows: 1fr 0.6fr 26.4% 5.8fr;
-    gap: 1px 1px;
-    grid-template-areas: "header header" "main CEE" "main busqueda" "comentarios comentarios";
-
-} 
+    grid-template-columns: 1.4fr 0.6fr;
+    grid-template-rows: 0.1fr 0.1fr 1.2fr 1.4fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "header header"
+      "main CEE"
+      "main busqueda"
+      "comentarios comentarios";
+ }
 
 
 /* Main
