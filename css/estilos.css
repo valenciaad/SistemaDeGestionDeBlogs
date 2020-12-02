@@ -40,12 +40,14 @@ body {
     border: 1px solid #D01137;
     box-shadow: 0 0 10px #000000;
     
+    
 }
 
 .contenedor {
     text-align: center;
     border-style: inset;
     border-color: #0195B7;
+    
 }
 
 
@@ -61,12 +63,13 @@ header {
 }
 
 .navegacion ul {
-    border: 1px solid #151413;
+    
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
+    
 }
 
 .navegacion li {
@@ -75,7 +78,6 @@ header {
 
 .navegacion a {
     color: #151413;
-    font-weight: 300;
     letter-spacing: 2px;
     text-decoration: none;
     background:#0195B7;
@@ -83,6 +85,8 @@ header {
     display: inline-block;
     width: 100%;
     text-align: center;
+    border: 1px solid #151413;
+    border-radius: 10px; 
 }
 
 .navegacion a:hover {
@@ -127,7 +131,7 @@ header {
 ---------------------------------*/
 
 main {
-    background: #0075A2;
+    background: #F6FAF0;
     padding: 10px;
     grid-area: main;
     margin: 0;
