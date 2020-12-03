@@ -304,14 +304,19 @@ border: 1px solid #d01137;
   grid-template-rows: 1fr;
   gap: 1px 1px;
   grid-template-areas: "imagen1x2 texto1x2";
+  border-bottom: 1px dashed #151413;
+  
 }
 
 .texto1x2 {
   grid-area: texto1x2;
+  text-align: left;
+  margin: 0  16px 10px;
 }
 
 .imagen1x2 {
   grid-area: imagen1x2;
+  margin: 0  16px 10px;
 }
 
 .figbusqueda {
