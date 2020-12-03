@@ -54,13 +54,12 @@ body {
 
 header {
   grid-area: header;  
-  padding: 1px;
-  background-image:  url("../imagenes/logoyslogan.jpg");  
-  background-position: center bottom;
+  background-position: center top;
   background-repeat: no-repeat; 
-  background-size: cover; 
+  background-color: #0195B7;
   
 }
+
 
 header h2, h1 {
   font-size: 0;
@@ -68,25 +67,30 @@ header h2, h1 {
 
 .navegacion ul {
     
-    list-style: none;
-    margin-top: 11%;
-    display: flex;
-    justify-content: flex-end;
+  list-style: none;    
+  display: flex;
+  justify-content: space-between;
+  align-items:flex-start;
+  margin: 0;
+  text-align: left;
     
 }
 
 .navegacion li {
-  flex: 3;
-
+  flex: 4;
+  }
+.logo{
+  display: inline;
+  
 }
 
 .navegacion a {
-    color: #151413;
-    letter-spacing: 2px;
-    text-decoration: none;
-    padding: 5px 30%;
-    display: inline-block;
-    text-align: center; 
+  color: #151413;
+  letter-spacing: 2px;
+  text-decoration: none;  
+  display: inline-block;
+  text-align: left;
+  padding: 15px 16px;
 }
 
 .navegacion a:hover {
@@ -110,7 +114,7 @@ header h2, h1 {
 .grid2por2 {
   display: grid;
   grid-template-columns: 1.4fr 0.6fr;
-  grid-template-rows: 0.3fr 1.7fr;
+  grid-template-rows: 50px 1.7fr;
   gap: 0px 0px;
   grid-template-areas:
     "header header"
@@ -120,7 +124,7 @@ header h2, h1 {
 .grid3por2 {
   display: grid;
   grid-template-columns: 1.3fr 0.7fr;
-  grid-template-rows: 0.1fr 0.1fr 1fr 1.9f;
+  grid-template-rows:  50px 0.1fr 1.6fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
     "header header"
@@ -151,7 +155,8 @@ main {
 .CEE {
   background: #151413;
   grid-area: CEE;
-  color: #f6faf0;
+  color: #f6faf0; 
+   
 }
 
  a:hover {
@@ -196,6 +201,7 @@ main {
   background: #0075A2;
   grid-area: busqueda;
   overflow: auto;
+  
 }
 #Buscar{
   width: auto;
@@ -334,3 +340,27 @@ select {
  padding: 15px 35%;
  
 }
+
+
+.dropdown a{
+  margin-right: 15px;
+}
+  
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color:#0195B7;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);  
+  z-index: 1;  
+  
+}
+
+.dropdown-content a {  
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #0075a2;}
+
+.dropdown:hover .dropdown-content {display: block;}
