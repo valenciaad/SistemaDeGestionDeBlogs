@@ -34,16 +34,7 @@
             <!--Main content-->         
             <article role="article">
                 <h2 class ="tituloBlog">Panel de usuario</h2>
-                <!--aqui va el contenido de la pagina--> 
-                <ul>
-                    <li><a href="recuperarPassword.html" title="Ve al tu pandel de usuario">Cambiar o recumperar contraseña</a></li>
-                    <li><a href="paginaBlog.html" title="Ve al tu pandel de blog">Saber más</a></li>
-                    <li><a href="paginaBlog.html" title="Ve al tu pandel de blog">Haz que mas personas encuentren tu blog online</a></li>
-                </ul>
-                <figure>
-                    <figcaption>Imagen representativa sobre la pagina web</figcaption>
-                    <img>
-                </figure>
+                <!--aqui va el contenido de la pagina-->                 
                 <form >
                     <label for="usuairos">Escoge un usuario:</label>
                     <select id="usuario" name="usuario">
@@ -53,16 +44,20 @@
                           <option value="usuario4">usuario 4</option>
                      </select>
                         <input type="submit"  value="Eliminar">
-                 </form>                  
+                 </form>  
+                 <ul class="opcionesUsuario">
+                    <li><a href="recuperarPassword.html" title="Ve al tu pandel de usuario">Cambiar o recumperar contraseña</a></li>
+                    <li><a href="paginaBlog.html" title="Ve al tu pandel de blog">Saber más</a></li>
+                    <li><a href="paginaBlog.html" title="Ve al tu pandel de blog">Haz que mas personas encuentren tu blog online</a></li>
+                </ul>                
             </article>
         </main>        
         <section id="busqueda" role="search" class ="contenedor">
             <h2>Busqueda y blogs recientes</h2>
                 <!--searh-->
                 <div class ="barraBusqueda">
-                <form>
-                    <input type="search" name="Buscar" id="Buscar" placeholder="Escribe una palabra clave ..." />
-                
+                <form action="biblioteca.html">
+                    <input type="search" name="Buscar" id="Buscar" placeholder="Escribe una palabra clave ..." />                
                     <input type="submit" name="Buscar" value="Buscar" />
                 </form>
             </div>
