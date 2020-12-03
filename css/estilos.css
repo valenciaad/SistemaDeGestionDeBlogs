@@ -124,7 +124,7 @@ header h2, h1 {
 .grid3por2 {
   display: grid;
   grid-template-columns: 1.3fr 0.7fr;
-  grid-template-rows:  50px 0.1fr 1.6fr 1fr;
+  grid-template-rows:  50px auto 1.6fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
     "header header"
@@ -143,8 +143,7 @@ main {
     margin: 0;
     grid-area: main;
     margin: 1%;
-    border: 2px inset #0075a2;
-
+    
 }
 
 
@@ -156,7 +155,6 @@ main {
   background: #151413;
   grid-area: CEE;
   color: #f6faf0; 
-   
 }
 
  a:hover {
