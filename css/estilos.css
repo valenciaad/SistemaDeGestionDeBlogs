@@ -21,6 +21,10 @@ html {
   box-sizing: border-box;
 }
 
+h1{
+  font-family: '';
+}
+
 *,
 *:before,
 *:after {
