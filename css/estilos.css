@@ -112,9 +112,10 @@ header h2, h1 {
 .grid2por1 header{
  background-image: url("../imagenes/logoyslogan.jpg");
  background-position:center ;
-
 }
-
+.grid2por1 .contenedor p{
+ text-align: center;
+}
 
 .grid2por2 {
   display: grid;
@@ -324,10 +325,16 @@ border: 1px solid #d01137;
 
 .imagen1x2 {
   grid-area: imagen1x2;
-  margin: 0  16px 10px;
+  margin: 0  16px 10px; 
+  text-align: center;
+  font-style: italic;
+  font-size: smaller; 
+}
+.scaled{
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-.figbusqueda {
+/*.figbusqueda {
   display: block;
   width: 300px;
   height: 300px;
@@ -338,7 +345,7 @@ border: 1px solid #d01137;
   margin: 0.5em;
   padding: 0.8em;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
+}*/
 
 /*Lista desplegable*/
 select {
