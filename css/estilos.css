@@ -103,7 +103,7 @@ header h2, h1 {
 .grid2por1 {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 0.5fr 1.6fr;
+  grid-template-rows: 0.3fr 1.6fr;
   gap: 0px 0px;
   grid-template-areas:
     "header"
