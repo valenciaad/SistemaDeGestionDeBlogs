@@ -90,7 +90,7 @@ header h2, h1 {
   text-decoration: none;  
   display: inline-block;
   text-align: left;
-  padding: 15px 16px;
+  padding: 15px 16px 10px;
 }
 
 .navegacion a:hover {
@@ -123,7 +123,7 @@ header h2, h1 {
 
 .grid3por2 {
   display: grid;
-  grid-template-columns: 1.3fr 0.7fr;
+  grid-template-columns: 1.3fr 0.6fr;
   grid-template-rows:  50px auto 1.6fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
@@ -196,35 +196,58 @@ main {
 ----------------------------------*/
 
 #busqueda {
-  background: #0075A2;
+  background: rgba(0, 117, 162, 0.2);
   grid-area: busqueda;
   overflow: auto;
+  padding-top:  5%;
   
 }
+#busqueda h2{
+  font-size: 0;
+}
 #Buscar{
-  width: auto;
+  width: 70%;
 }
 .barraBusqueda input[type="submit"]{
   width: auto;
   
 }
-.recientes {
-  margin: auto 10%;
+.barraBusqueda{
+  display: inline;
+  
+}
+.recientes { 
   text-align: left;
   list-style: none;
-  background: #f6faf0;
-  border: 1px solid #0075A2;
-  box-shadow: 0 0 10px #000000;
+ /* border: 1px solid #0075A2;*/
+ /* box-shadow: 0 0 10px #000000;*/
   overflow: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+
+}
+
+.recientes li{
+ 
+  box-shadow: 0 0 5px #000000;
+  margin-bottom: 10%;  
+  background: #F6FAF0;
+  border: 1px solid #0075A2 ;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .recientes p{
-  margin-right: 5%;
+  margin: 0 5%;
+  margin-bottom: 5px;
   text-align: justify;
   padding: 2px;
-  background: rgba(0, 117, 162, 0.2);
 }
 
+.recientes h3 {
+  text-align: center;
+  margin-bottom: 3px;
+}
 
 .herramientas  {
   
