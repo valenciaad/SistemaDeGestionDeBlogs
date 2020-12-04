@@ -1,0 +1,18 @@
+{% extends 'base2por1.html' %}
+{%block header%} 
+    <main id="contenidoBlog" role="main" class ="contenedor">
+        <h2>Bienvenido</h2>
+        <article role="article">
+            <form action="verificarCorreo.html">
+                <input type="text" name="user" id="id_user" placeholder="Usuario"><br><br>
+                <input type="password" name="pssw" id="id_pssw" placeholder="Contraseña"><br><br>
+                <input type="submit" value="Log in">
+            </form>
+            <p>¿Olvidaste constraseña?</p>
+            <a href="recuperarPassword">Recupérala</a>
+            <p>¿Sin cuenta?</p>
+            <a href="crearCuenta">Crear una</a>
+        </article>
+    </main>
+</body>
+{%endblock%}

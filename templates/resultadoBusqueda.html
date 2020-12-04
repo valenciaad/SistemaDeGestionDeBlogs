@@ -1,36 +1,5 @@
-<!DOCTYPE>
-<html lang="es">
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<head>
-    <link rel="stylesheet" href="css/estilos.css">
-    <title>Resultados de busqueda</title>
-    <!-- [if lt  IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js>"
-            </script>
-        <![endif]-->
-</head>
-
-<body>
-    <div class=grid2por1></div>
-    <header id="headerPrincipal" role="banner" class="contenedor">
-        <!--branding and navigation-->
-        <h2>Slogan va aqui</h2>
-        <nav role="navigation" class="navegacion">                
-            <ul> 
-                 
-                <li ><a href="PanelBlog.html" title="Ve al tu pandel de blog">Panel de  Blog</a></li>
-                <li ><img class = "logo" src="imagenes/blusquedaLogo.png" alt="imagen del blog" width=auto height="50"></li >
-                <div class="dropdown">
-                <li ><a href="panelUsuario.html" title="Ve al tu pandel de usuario">Panel de usuario</a></li>
-                <div class="dropdown-content">
-                <li ><a href="index.html" title="Ve al tu pandel de usuario">Cerrar sesion</a></li>
-            </div>
-            </div>
-            </ul>              
-        </nav>   
-    </header>
+{% extends 'base2por2.html' %}
+{%block header%}
     <main id="contenidoBlog" role="main" class="contenedor" class="contenedor">
         <!--Main content-->
         <article role="article">
@@ -45,7 +14,7 @@
                             <figure class="figbusqueda">      
                                 <figcaption>Imagen que representa el contenido de este blog
                                 </figcaption>                          
-                                <img class="scaled" src="imagenes/technologymonitoring.jpg" alt="imagen del blog"  width=290px height=290px>
+                                <img class="scaled" src="static/imagenes/webline-coding-html.jpg" alt="imagen del blog"  width=290px height=290px>
                                 
                             </figure>
                         </div>
@@ -63,7 +32,7 @@
                             <figure class="figbusqueda">  
                                 <figcaption>Imagen que representa el contenido de este blog
                                 </figcaption>                              
-                                <img class="scaled" src="imagenes/webline-coding-html.jpg" alt="imagen del blog" width=290px height=290px>
+                                <img class="scaled" src="static/imagenes/webline-coding-html.jpg" alt="imagen del blog" width=290px height=290px>
                                 
                             </figure>
                         </div>
@@ -78,5 +47,4 @@
     </main>
     </div>
 </body>
-
-</html>
+{%endblock%}

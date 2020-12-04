@@ -1,0 +1,50 @@
+{% extends 'base3por2.html' %}
+{%block header%}   
+                <main id = "contenidoBlog" role="main" class ="contenedor">  
+                    <!--Main content-->                
+                    <article role="article">
+                        <h2 class ="tituloBlog">Titulo del blog</h2>
+                        <figure>                            
+                            <img src="../static/imagenes/bannerPrueba.jpg" alt="imagen del blog" width="640" height="213">
+                            <figcaption>Imagen que representa el contenido de este blog</figcaption>
+                        </figure> 
+                        <p>Contenido del blog...Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
+                            commodo consequat. 
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                             Excepteur sint occaecat cupidatat non proident, 
+                             sunt in culpa qui officia deserunt mollit anim id est laborum.</p>                        
+                                          
+                </main>
+                <section class = "comentarios contenedor">
+                    <!--comments-->
+                    <h2>Comentarios:</h2>
+                    <form >
+                        <textarea  name="tComentario"  id="tComentario" placeholder="Escribe tu comentario ..."></textarea>
+                        <br />
+                        <input type="submit" name="Comentar" value="Comentar" class="boton" />
+                    </form>
+                    <article class="comentario">
+                        <h3>Comentario1</h3>
+                        <p>Nombre de la persona 1</p>
+                        <p>Comentario de la persona 1</p>
+                    </article>
+                    <article class="comentario" >
+                        <h3>Comentario2</h3>
+                        <p>Nombre de la persona 2</p>
+                        <p>Comentario de la persona 2</p>
+                    </article>
+                </section>
+            </article>
+        <section class ="CEE contenedor" >
+            <h2>Barra de herminetas</h2>
+                <!--tool bar-->
+                <ul class="herramientas" >
+                    <li><a href="crearBlog" title="Crea un nuevo Blog">Crear Blog</a></li>
+                    <li><a href="crearBlog" title="Edita este Blog">Editar</a></li>
+                    <li><a href="Eliminar.html" title="Elimina este blog">Eliminar</a></li>
+                </ul>            
+        </section>
+       
+{%endblock%}

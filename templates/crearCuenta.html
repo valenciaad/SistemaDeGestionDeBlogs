@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/estilos.css">
-    <title>Creación de cuenta</title>    
-</head>
-<body class ="grid2por1">    
-    <header id="headerPrincipal" role="banner" class ="contenedor">
-        <h1>Sistema de gestions de blogs</h1>
-        </figure>
-        <h2>Slogan va a qui</h2>
-    </header>
+{% extends 'base2por1.html' %}
+{%block header%} 
     <main id="contenidoBlog" role="main" class ="contenedor">  
         <h2>Bienvenido</h2>      
         <article role="article">
@@ -25,4 +12,4 @@
         </article>
     </main>
 </body>
-</html>
+{%endblock%}

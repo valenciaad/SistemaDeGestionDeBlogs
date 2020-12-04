@@ -1,0 +1,53 @@
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <title>Crear Blog</title>
+        <link rel="stylesheet" href="../static/css/estilos.css"> 
+        <!-- [if lt  IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js>"
+            </script>
+        <![endif]-->
+    </head>
+    <body class ="grid2por2">
+     
+        <header id="headerPrincipal" role="banner" class ="contenedor" >
+            <!--branding and navigation-->            
+                <h1>Sistema de gestions de blogs</h1>
+                <h2>Slogan va a qui</h2>             
+                <nav role="navigation" class="navegacion">                
+                    <ul> 
+                         
+                        <li ><a href="panelBlog" title="Ve al tu pandel de blog">Panel de  Blog</a></li>
+                        <li ><img class = "logo" src="../static/imagenes/blusquedaLogo.png" alt="imagen del blog" width=auto height="50"></li >
+                        <div class="dropdown">
+                        <li ><a href="panelUsuario" title="Ve al tu pandel de usuario">Panel de usuario</a></li>
+                        <div class="dropdown-content">
+                        <li ><a href="/" title="Ve al tu pandel de usuario">Cerrar sesion</a></li>
+                    </div>
+                    </div>
+                    </ul>              
+                </nav>           
+        </header>
+
+        <section id="busqueda" role="search" class ="contenedor">
+            <h2>Busqueda y blogs recientes</h2>
+                <!--searh-->
+                <div class ="barraBusqueda">
+                <form action="/resultadoBusqueda">
+                    <input type="search" name="Buscar" id="Buscar" placeholder="Escribe una palabra clave ..." />                
+                    <input type="submit" name="Buscar" value="Buscar" />
+                </form>
+            </div>
+            <aside >
+                <ul class="recientes">
+                    <li><a href="paginaBlog" title="Ve al blog reciente 1"><h3>Reciente 1</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p></a></li>
+                    <li><a href="paginaBlog" title="Ve al blog reciente 1"><h3>Reciente 2</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p></a></li>
+                    <li><a href="paginaBlog" title="Ve al blog reciente 1"><h3>Reciente 3</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p></a></li>
+                </ul>
+            </aside>
+        </section>        
+{%block header%}
+{%endblock%}

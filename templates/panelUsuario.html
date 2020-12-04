@@ -1,0 +1,25 @@
+{% extends 'base2por2.html' %}
+{%block header%}
+        <main id = "contenidoPanel" role="main"  class ="contenedor">   
+            <!--Main content-->         
+            <article role="article">
+                <h2 class ="tituloBlog">Panel de usuario</h2>
+                <!--aqui va el contenido de la pagina-->                 
+                <form >
+                    <label for="usuairos">Escoge un usuario:</label>
+                    <select id="usuario" name="usuario">
+                          <option value="usuario1">usuario 1</option>
+                          <option value="usuario2">usuario 2</option>
+                          <option value="usuario3">usuario 3</option>
+                          <option value="usuario4">usuario 4</option>
+                     </select>
+                        <input type="submit"  value="Eliminar">
+                 </form>  
+                 <ul class="opcionesUsuario">
+                    <li><a href="recuperarPassword" title="Ve al tu pandel de usuario">Cambiar o recumperar contraseña</a></li>
+                    <li><a href="paginaBlog" title="Ve al tu pandel de blog">Saber más</a></li>
+                    <li><a href="paginaBlog" title="Ve al tu pandel de blog">Haz que mas personas encuentren tu blog online</a></li>
+                </ul>                
+            </article>
+        </main>        
+{%endblock%}
