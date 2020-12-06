@@ -21,12 +21,14 @@ def verificarCorreo():
 
 
 @app.route('/paginaBlog/')
-@app.route('/paginaBlog/<blogId>')
-def paginaBlog(blogId="1"):
+@app.route('/paginaBlog/<int:blogId>')
+def paginaBlog(blogId=0):
     contenidoBlog = [{"contenido":"Contenido del blog...Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                    "titulo":"Titulo del blog"}]
-    print(contenidoBlog[0]["titulo"])
-    return render_template('paginaBlog.html',contenidoBlog=contenidoBlog,blogId=blogId, titulo=contenidoBlog[0]["titulo"])
+                    "titulo":"Titulo del blog 0",
+                    "blogId":0},{"contenido":"Contenido del blog...Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    "titulo":"Titulo del blog 1",
+                    "blogId":1}]
+    return render_template('paginaBlog.html',contenidoBlog=contenidoBlog[blogId]["contenido"], titulo=contenidoBlog[blogId]["titulo"])
 
 
 @app.route('/resultadoBusqueda')
