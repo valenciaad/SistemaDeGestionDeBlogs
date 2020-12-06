@@ -5,15 +5,15 @@
             <article role="article">
                 <!--aqui va el contenido de la pagina-->  
             <h2 class ="titulo">Crea/edita tu blog</h2>
-            <form method="POST">
+            <form method="POST"  enctype="multipart/form-data">
             <label for="subirImagen">Sube una imagen</label>            
-            <input type="file" name="subirImagen" id="subirImagen">
+            <input type="file" name="subirImagen" id="subirImagen" required>
             <br>
             <label for="titulo">Dale un titulo a tu blog: </label>
             <br>
-            <input type="text" name="titulo" id="titulo">
+            <input type="text" name="titulo" id="titulo" required>
             <br>
-            <textarea  class ="inputBlog"name="cuerpoBlog" id="cuerpoBlog" placeholder="Escribe algo interesante..."></textarea>
+            <textarea  class ="inputBlog"name="cuerpoBlog" id="cuerpoBlog" placeholder="Escribe algo interesante..." required></textarea >
             <br>
             <label for="categorias">Escoge una categoria:</label>            
             <select id="categorias" name="categorias">

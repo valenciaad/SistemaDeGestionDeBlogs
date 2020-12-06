@@ -1,28 +1,36 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,flash, request, redirect, url_for
 from datetime import datetime 
 import json
 import os.path
 from datetime import date
 from collections import defaultdict
+from werkzeug.utils import secure_filename
 
+UPLOAD_FOLDER =  os.path.abspath(os.getcwd()) + '\static\imagenes'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 app = Flask(__name__)
-
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# Lee el archivo db.json y retorna el array ordenado por fecha
+# ordenadaFecha - la los datos  del archivo ordenados por fecha
 def recientes():
     if os.path.exists('db.json'):
         with open('db.json') as db:
             ordenadaFecha = json.load(db)
-            ordenadaFecha.sort(reverse=True,key = lambda x: datetime.strptime(x['fecha'], '%d/%m/%Y')) 
+            ordenadaFecha.sort(reverse=True,key = lambda x: datetime.strptime(x['fecha'], '%d/%m/%Y,%H:%M:%S')) 
             for i,data in enumerate(ordenadaFecha):
                 ordenadaFecha[i]["contenido"] = (data["contenido"][:100] + '...')
-            print(ordenadaFecha)
     return ordenadaFecha
 
+#Lee el archivo db.json y retorna la fila espesificada 
+#row - la fila que se quiere obtener del archivo
 def query (row):
     if os.path.exists('db.json'):
         with open('db.json') as jdb:
             db = json.load(jdb)
     return db[row]
 
+# retorna un nuevo id
+#id - nuevo id de bog
 def existe():
     if os.path.exists('db.json'):
         with open('db.json') as jdb:
@@ -36,9 +44,15 @@ def existe():
             break
     return id
 
+# Escribe datos en db.json 
 def write_json(data, filename='db.json'): 
     with open(filename,'w') as f: 
         json.dump(data, f, indent=4)
+
+#limita las extensiones que se pueden subir
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
 def home():
@@ -49,22 +63,27 @@ def home():
 def crearBlog():
     ordenadaFecha = recientes() 
     id = existe()
-    today = date.today()
-    fecha = today.strftime("%d/%m/%Y")
+    now = datetime.now()
+    fecha = now.strftime("%d/%m/%Y,%H:%M:%S")
     cuerpo={}    
     if request.method =='POST':
         contenido = request.form["cuerpoBlog"]
         titulo = request.form["titulo"]
+        imagen = request.files["subirImagen"]
+        if imagen and allowed_file(imagen.filename):
+            nombreImagen = secure_filename(str(id)+imagen.filename)
+            imagen.save(os.path.join(app.config['UPLOAD_FOLDER'], nombreImagen))
         cuerpo = {"contenido": contenido ,
         "titulo": titulo ,
         "blogId": id,
-         "imagen": "imagen0.jpg",
+         "imagen": nombreImagen,
         "fecha": fecha}
         if (id != None and contenido != None):
             with open('db.json') as jdb:
                 db = json.load(jdb)
                 db.append(cuerpo)
-                write_json(db)       
+                write_json(db)   
+                return redirect('/paginaBlog/'+str(id))
     return render_template('crearBlog.html',titulo="Crear Blog",ordenadaFecha=ordenadaFecha)
 
 @app.route('/panelBlog')
