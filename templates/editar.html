@@ -1,0 +1,33 @@
+{% extends 'base2por2.html' %}
+{%block header%}
+        <main id = "contenidoBlog" role="main"  class ="contenedor">   
+            <!--Main content-->         
+            <article role="article">
+                <!--aqui va el contenido de la pagina-->  
+            <h2 class ="titulo">Edita tu blog</h2>
+            <form method="POST"  enctype="multipart/form-data">
+            <label for="subirImagen">Sube una imagen</label>            
+            <input type="file"  name="subirImagen" id="subirImagen" >
+            <br>
+            <label for="titulo">Dale un titulo a tu blog: </label>
+            <br>
+            <input type="text" value ="{{contenidoBlog['titulo']}}" name="titulo" id="titulo" required>
+            <br>
+            <textarea  class ="inputBlog"name="cuerpoBlog" id="cuerpoBlog" placeholder="Escribe algo interesante..." required>{{contenidoBlog['contenido']}}</textarea >
+            <br>
+            <label for="categorias">Escoge una categoria:</label>            
+            <select id="categorias" name="categorias">
+            <option value="categoria1">Categoria 1</option>
+            <option value="categoria2">Categoria 2</option>
+            <option value="categoria3">Categoria 3</option>
+            <option value="categoria4">Categoria 4</option>
+            </select>
+            <br>
+            <input type="submit" name="upload" id="upload" value="Upload">
+            </form>
+            </article>
+        </main>        
+      
+    </body>
+    </html>
+{%endblock%}

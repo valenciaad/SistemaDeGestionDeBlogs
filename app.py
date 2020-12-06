@@ -126,4 +126,34 @@ def recuperarPassword():
 @app.route('/crearCuenta')
 def crearCuenta():    
     return render_template('crearCuenta.html',titulo =  "Crear cuenta")
+
+@app.route('/editar/',methods=['GET','POST'])
+@app.route('/editar/<int:blogId>',methods=['GET','POST'])
+def editar(blogId=0):    
+    ordenadaFecha = recientes() 
+    contenidoBlog = query(blogId)
+    now = datetime.now()
+    fecha = now.strftime("%d/%m/%Y,%H:%M:%S")
+    nombreImagen = contenidoBlog['imagen']
+    if request.method =='POST':
+        contenido = request.form["cuerpoBlog"]
+        titulo = request.form["titulo"]
+        if request.files["subirImagen"] != None:
+            imagen = request.files["subirImagen"]
+            if imagen and allowed_file(imagen.filename):
+                nombreImagen = secure_filename(str(id)+imagen.filename)
+                imagen.save(os.path.join(app.config['UPLOAD_FOLDER'], nombreImagen))           
+        cuerpo = {"contenido": contenido ,
+        "titulo": titulo ,
+        "blogId": blogId,
+         "imagen": nombreImagen,
+        "fecha": fecha}
+        if (id != None and contenido != None):
+            with open('db.json') as jdb:
+                db = json.load(jdb)
+                db[blogId]=cuerpo
+                write_json(db)   
+                return redirect('/paginaBlog/'+str(blogId))
+
+    return render_template('editar.html',titulo =  "Editar",ordenadaFecha=ordenadaFecha,contenidoBlog =contenidoBlog)
  
