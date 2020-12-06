@@ -5,10 +5,10 @@
                     <article role="article">
                         <h2 class ="tituloBlog">{{titulo}}</h2>
                         <figure>                            
-                            <img src="../static/imagenes/bannerPrueba.jpg" alt="imagen del blog" width="640" height="213">
+                            <img src="../static/imagenes/{{contenidoBlog['imagen']}}" alt="imagen del blog" width="640" height="213">
                             <figcaption>Imagen que representa el contenido de este blog</figcaption>
                         </figure> 
-                        <p>{{contenidoBlog}}</p>                        
+                        <p>{{contenidoBlog['contenido']}}</p>                        
                                           
                 </main>
                 <section class = "comentarios contenedor">
@@ -35,8 +35,8 @@
             <h2>Barra de herminetas</h2>
                 <!--tool bar-->
                 <ul class="herramientas" >
-                    <li><a href="crearBlog" title="Crea un nuevo Blog">Crear Blog</a></li>
-                    <li><a href="crearBlog" title="Edita este Blog">Editar</a></li>
+                    <li><a href="/crearBlog" title="Crea un nuevo Blog">Crear Blog</a></li>
+                    <li><a href="/crearBlog" title="Edita este Blog">Editar</a></li>
                     <li><a href="Eliminar.html" title="Elimina este blog">Eliminar</a></li>
                 </ul>            
         </section>

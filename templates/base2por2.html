@@ -20,10 +20,10 @@
                 <nav role="navigation" class="navegacion">                
                     <ul> 
                          
-                        <li ><a href="panelBlog" title="Ve al tu pandel de blog">Panel de  Blog</a></li>
+                        <li ><a href="/panelBlog" title="Ve al tu pandel de blog">Panel de  Blog</a></li>
                         <li ><img class = "logo" src="../static/imagenes/blusquedaLogo.png" alt="imagen del blog" width=auto height="50"></li >
                         <div class="dropdown">
-                        <li ><a href="panelUsuario" title="Ve al tu pandel de usuario">Panel de usuario</a></li>
+                        <li ><a href="/panelUsuario" title="Ve al tu pandel de usuario">Panel de usuario</a></li>
                         <div class="dropdown-content">
                         <li ><a href="/" title="Ve al tu pandel de usuario">Cerrar sesion</a></li>
                     </div>
@@ -43,12 +43,9 @@
             </div>
             <aside >
                 <ul class="recientes">
-                    <li><a href="1" title="Ve al blog reciente 1"><h3>Reciente 1</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p></a></li>
-                    <li><a href="0" title="Ve al blog reciente 1"><h3>Reciente 2</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p></a></li>
-                    <li><a href="1" title="Ve al blog reciente 1"><h3>Reciente 3</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p></a></li>
+                    <li><a href="/paginaBlog/{{ordenadaFecha[0]['blogId']}}" title="Ve al blog reciente 1"><h3>{{ordenadaFecha[0]["titulo"]}}</h3><p>{{ordenadaFecha[0]["contenido"]}}</p></a></li>
+                    <li><a href="/paginaBlog/{{ordenadaFecha[1]['blogId']}}" title="Ve al blog reciente 1"><h3>{{ordenadaFecha[1]["titulo"]}}</h3><p>{{ordenadaFecha[1]["contenido"]}}</p></a></li>
+                    <li><a href="/paginaBlog/{{ordenadaFecha[2]['blogId']}}" title="Ve al blog reciente 1"><h3>{{ordenadaFecha[2]["titulo"]}}</h3><p>{{ordenadaFecha[2]["contenido"]}}</p></a></li>
                 </ul>
             </aside>
         </section>        

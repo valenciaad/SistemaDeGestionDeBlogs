@@ -233,7 +233,7 @@ main p{
   overflow: auto;
   padding-left: 10px;
   padding-right: 10px;
-
+  
 }
 
 .recientes li{
@@ -251,6 +251,7 @@ main p{
   margin-bottom: 5px;
   text-align: justify;
   padding: 2px;
+ 
 }
 
 .recientes h3 {
