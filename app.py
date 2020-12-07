@@ -1,11 +1,12 @@
-from flask import Flask, render_template, request, flash, request, redirect, url_for
-from datetime import datetime
 import json
 import os.path
-from datetime import date
 from collections import defaultdict
-from werkzeug.utils import secure_filename
+from datetime import date, datetime
 
+import yagmail as yagmail
+from flask import Flask, flash, redirect, render_template, request, url_for
+from validate_email import validate_email
+from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = os.path.abspath(os.getcwd()) + '\static\imagenes'
 
@@ -176,11 +177,30 @@ def panelUsuario():
     ordenadaFecha = recientes()
     return render_template('panelUsuario.html', titulo="Panel de usuario", ordenadaFecha=ordenadaFecha)
 
+# Función que valida si es correcto un email
 
-@app.route('/recuperarPassword')
+
+def isEmailValid(email):
+    is_valid = validate_email(email)
+    return is_valid
+
+
+@app.route('/recuperarPassword/', methods=('GET', 'POST'))
 def recuperarPassword():
     ordenadaFecha = recientes()
-    return render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
+    if request.method == 'POST':
+        email = request.form['mail']
+        valid = isEmailValid(email)
+        if valid == True:
+            yag = yagmail.SMTP('uninortegrupo9b@gmail.com', 'unigrupob')
+            yag.send(to=email, subject='Activa tu cuenta',
+                     contents='Bienvenido, usa este vínculo para activar tu cuenta ('+request.method+')')
+            return verificarCorreo()
+        else:
+            flash('Correo inválido')
+            return render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
+    else:
+        return render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
 
 
 @app.route('/crearCuenta')
