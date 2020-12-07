@@ -77,12 +77,16 @@ def home():
 
 # Inicio código login
 
+# isUsernameValid: función que verifica que el usuario sea correcto. Por defecto se usó "Prueba"
+
 
 def isUsernameValid(user):
     if user == "Prueba":
         return True
     else:
         return False
+
+# isPasswordValid: función que verifica que la contraseña sea correcta. Por defecto se usó "Prueba1234"
 
 
 def isPasswordValid(password):
@@ -92,16 +96,20 @@ def isPasswordValid(password):
     else:
         return False
 
+# login: función asignada a la ruta "/login" que admite los métodos GET and POST
+# de acuerdo a la configuración en index.html, se dejó por defecto el método POST
+# para enviar la información al servidor, esta recibe el usuario y contraseña y
+# los verfica con las funciones ya descritas anteriormente y devuelve errores si los hay
+# Cuando son correctos los datos, redirecciona a "/panelBlog"
+# En el caso de encontrar un error diferente, ejecuta el código bajo "except"
+
 
 @app.route("/login", methods=('GET', 'POST'))
 def login():
     try:
-
         username = request.args.get('user')
         password = request.args.get('pssw')
-
         error = None
-
         if not isUsernameValid(username):
             error = "Usuario incorrecto"
             flash(error)
@@ -177,12 +185,20 @@ def panelUsuario():
     ordenadaFecha = recientes()
     return render_template('panelUsuario.html', titulo="Panel de usuario", ordenadaFecha=ordenadaFecha)
 
-# Función que valida si es correcto un email
+# isEmailValid: Función que valida si es correcto un email usando el paquete validate_email
 
 
 def isEmailValid(email):
     is_valid = validate_email(email)
     return is_valid
+
+# recuperarPassword: función que permite los métodos GET y POST,
+# cuando se hace un llamado se ejecuta el método GET y devuelve
+# la página principal "recuperarPassword.html". Una vez se envíe
+# el formulario se ejecuta el método POST y una vez verificado el
+# correo electrónico se envía un mensaje desde la cuenta de Gmail
+# configurada al correo suministrado.
+# Esta es asignada a la ruta "/recuperarPassword/"
 
 
 @app.route('/recuperarPassword/', methods=('GET', 'POST'))
