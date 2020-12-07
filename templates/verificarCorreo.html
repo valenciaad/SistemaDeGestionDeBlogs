@@ -1,29 +1,31 @@
 {% extends 'base2por1.html' %}
-{%block header%} 
+{%block header%}
+
 <head>
     <title>Verificación de correo</title>
-    <link rel="stylesheet" href="css/estilos.css"> 
+    <link rel="stylesheet" href="css/estilos.css">
     <!-- [if lt  IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js>"
     </script>
     <![endif]-->
 </head>
-    <title>Verifica tu correo</title>
+<title>Verifica tu correo</title>
 </head>
-<body class = grid2por1>
-    <header id = "headerPrincipal" role="banner" class="contenedor">
-        <!--branding and navigation-->            
-            <h2>Sistema de gestions de blogs</h2>
-            </figure>
-            <h2>Slogan va a qui</h2> 
-         
-    </header>  
- <main role="main" class="contenedor">   
-<h2>Ya casi terminas</h2>
-<p>Te enviamos un correo de verificación. </p>
-<p>Por favor revisalo y da clic en el enlace</p>
-<button>Atras</button>
-</main> 
+
+<body class=grid2por1>
+    <header id="headerPrincipal" role="banner" class="contenedor">
+        <!--branding and navigation-->
+        <h2>Sistema de gestions de blogs</h2>
+        </figure>
+        <h2>Slogan va a qui</h2>
+    </header>
+    <main role="main" class="contenedor">
+        <h2>Ya casi terminas</h2>
+        <p>Te enviamos un correo de verificación. </p>
+        <p>Por favor revisalo y da clic en el enlace</p>
+        <button onclick="window.location.href='{{url_for('home')}}';">Atras</button>
+    </main>
 </body>
+
 </html>
 {%endblock%}

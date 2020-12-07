@@ -1,12 +1,13 @@
-from flask import Flask, render_template, request, flash, request, redirect, url_for
-from datetime import datetime
 import json
 import os.path
-from datetime import date
 from collections import defaultdict
 from werkzeug.utils import secure_filename
 import yagmail as yagmail
 
+import yagmail as yagmail
+from flask import Flask, flash, redirect, render_template, request, url_for
+from validate_email import validate_email
+from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = os.path.abspath(os.getcwd()) + '\static\imagenes'
 
@@ -69,12 +70,16 @@ def home():
 
 # Inicio código login
 
+# isUsernameValid: función que verifica que el usuario sea correcto. Por defecto se usó "Prueba"
+
 
 def isUsernameValid(user):
     if user == "Prueba":
         return True
     else:
         return False
+
+# isPasswordValid: función que verifica que la contraseña sea correcta. Por defecto se usó "Prueba1234"
 
 
 def isPasswordValid(password):
@@ -88,12 +93,9 @@ def isPasswordValid(password):
 @app.route("/login", methods=('GET', 'POST'))
 def login():
     try:
-
         username = request.args.get('user')
         password = request.args.get('pssw')
-
         error = None
-
         if not isUsernameValid(username):
             error = "Usuario incorrecto"
             flash(error)
@@ -170,29 +172,38 @@ def panelUsuario():
     ordenadaFecha = recientes()
     return render_template('panelUsuario.html', titulo="Panel de usuario", ordenadaFecha=ordenadaFecha)
 
-#Ruta para recuperar contaseña
-@app.route('/recuperarPassword',methods=["GET","POST"])
-def recuperarPassword():    
-    try:
-        ordenadaFecha = recientes()
-        if request.method == 'POST':
-            email = request.form['correo']            
+# isEmailValid: Función que valida si es correcto un email usando el paquete validate_email
+
+
+def isEmailValid(email):
+    is_valid = validate_email(email)
+    return is_valid
+
+# recuperarPassword: función que permite los métodos GET y POST,
+# cuando se hace un llamado se ejecuta el método GET y devuelve
+# la página principal "recuperarPassword.html". Una vez se envíe
+# el formulario se ejecuta el método POST y una vez verificado el
+# correo electrónico se envía un mensaje desde la cuenta de Gmail
+# configurada al correo suministrado.
+# Esta es asignada a la ruta "/recuperarPassword/"
+
+
+@app.route('/recuperarPassword/', methods=('GET', 'POST'))
+def recuperarPassword():
+    ordenadaFecha = recientes()
+    if request.method == 'POST':
+        email = request.form['mail']
+        valid = isEmailValid(email)
+        if valid == True:
+            yag = yagmail.SMTP('uninortegrupo9b@gmail.com', 'unigrupob')
+            yag.send(to=email, subject='Activa tu cuenta',
+                     contents='Bienvenido, usa este vínculo para activar tu cuenta ('+request.method+')')
+            return verificarCorreo()
         else:
-            email = request.args.get('correo')
-        error = None
-        yag = yagmail.SMTP('uninortegrupo9b@gmail.com','unigrupob')
-        yag.send(to=email, subject='Recupera tu contraseña', 
-                contents='Con el siguiente link puedes recuperar tu contraseña ('+request.method+')')
-        if (email == None):
-            error = 'escribe un correo'
-            flash(error)            
-        else:
-            flash('verifica tu correo')
-            render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
-       # return render_template('recuperarPassword.html', titulo="verificar Correo", ordenadaFecha=ordenadaFecha)
-    except:
-        return render_template('/recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)   
-    return render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
+            flash('Correo inválido')
+            return render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
+    else:
+        return render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
 
 #Ruta para crear cuenta
 @app.route('/crearCuenta')
