@@ -5,6 +5,7 @@ import os.path
 from datetime import date
 from collections import defaultdict
 from werkzeug.utils import secure_filename
+import yagmail as yagmail
 
 
 UPLOAD_FOLDER = os.path.abspath(os.getcwd()) + '\static\imagenes'
@@ -13,10 +14,9 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = os.urandom(24)
+
 # Lee el archivo db.json y retorna el array ordenado por fecha
 # ordenadaFecha - la los datos  del archivo ordenados por fecha
-
-
 def recientes():
     if os.path.exists('db.json'):
         with open('db.json') as db:
@@ -30,8 +30,6 @@ def recientes():
 
 # Lee el archivo db.json y retorna la fila espesificada
 # row - la fila que se quiere obtener del archivo
-
-
 def query(row):
     if os.path.exists('db.json'):
         with open('db.json') as jdb:
@@ -40,8 +38,6 @@ def query(row):
 
 # retorna un nuevo id
 # id - nuevo id de bog
-
-
 def existe():
     if os.path.exists('db.json'):
         with open('db.json') as jdb:
@@ -56,20 +52,17 @@ def existe():
     return id
 
 # Escribe datos en db.json
-
-
 def write_json(data, filename='db.json'):
     with open(filename, 'w') as f:
         json.dump(data, f, indent=4)
 
 # limita las extensiones que se pueden subir
-
-
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+#rutara la pagina de index
 @app.route('/')
 def home():
     return render_template('index.html', titulo="Bienvenido")
@@ -91,7 +84,7 @@ def isPasswordValid(password):
     else:
         return False
 
-
+# ruta para la pagina de index, es la misma de login
 @app.route("/login", methods=('GET', 'POST'))
 def login():
     try:
@@ -115,7 +108,8 @@ def login():
         return render_template("index.html")
 # fin código login
 
-
+#rutara la pagina de Crear blog
+#Toma los datos del formulario por get o por post los guarda en un dicionario y luego los escribe en un archivo de json
 @app.route('/crearBlog', methods=['GET', 'POST'])
 def crearBlog():
     ordenadaFecha = recientes()
@@ -144,19 +138,19 @@ def crearBlog():
                 return redirect('/paginaBlog/'+str(id))
     return render_template('crearBlog.html', titulo="Crear Blog", ordenadaFecha=ordenadaFecha)
 
-
+#Ruta para panel de blog
 @app.route('/panelBlog')
 def panelBlog():
     ordenadaFecha = recientes()
     return render_template('panelBlog.html', titulo="Panel de Blog", ordenadaFecha=ordenadaFecha)
 
-
+#Ruta para verficar correo
 @app.route('/verificarCorreo')
 def verificarCorreo():
-    ordenadaFecha = recientes()
+    ordenadaFecha = recientes()     
     return render_template('verificarCorreo.html', titulo="verificar Correo", ordenadaFecha=ordenadaFecha)
 
-
+#Ruta para pagina de blog
 @app.route('/paginaBlog/')
 @app.route('/paginaBlog/<int:blogId>')
 def paginaBlog(blogId=0):
@@ -164,30 +158,50 @@ def paginaBlog(blogId=0):
     ordenadaFecha = recientes()
     return render_template('paginaBlog.html', contenidoBlog=contenidoBlog, titulo=contenidoBlog["titulo"], ordenadaFecha=ordenadaFecha)
 
-
+#Ruta para resultados de busqueda
 @app.route('/resultadoBusqueda')
 def resultadoBusqueda():
     ordenadaFecha = recientes()
     return render_template('resultadoBusqueda.html', titulo="Resultado de busqueda", ordenadaFecha=ordenadaFecha)
 
-
+#Ruta para panel de usuario
 @app.route('/panelUsuario')
 def panelUsuario():
     ordenadaFecha = recientes()
     return render_template('panelUsuario.html', titulo="Panel de usuario", ordenadaFecha=ordenadaFecha)
 
-
-@app.route('/recuperarPassword')
-def recuperarPassword():
-    ordenadaFecha = recientes()
+#Ruta para recuperar contaseña
+@app.route('/recuperarPassword',methods=["GET","POST"])
+def recuperarPassword():    
+    try:
+        ordenadaFecha = recientes()
+        if request.method == 'POST':
+            email = request.form['correo']            
+        else:
+            email = request.args.get('correo')
+        error = None
+        yag = yagmail.SMTP('uninortegrupo9b@gmail.com','unigrupob')
+        yag.send(to=email, subject='Recupera tu contraseña', 
+                contents='Con el siguiente link puedes recuperar tu contraseña ('+request.method+')')
+        if (email == None):
+            error = 'escribe un correo'
+            flash(error)            
+        else:
+            flash('verifica tu correo')
+            render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
+       # return render_template('recuperarPassword.html', titulo="verificar Correo", ordenadaFecha=ordenadaFecha)
+    except:
+        return render_template('/recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)   
     return render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
 
-
+#Ruta para crear cuenta
 @app.route('/crearCuenta')
 def crearCuenta():
     return render_template('crearCuenta.html', titulo="Crear cuenta")
 
-
+#Ruta para editar un blog
+#toma el id de blog por get o post y lo manda como parametro a query 
+#llena el formulario con la informacion retornada de query y da la opcion de actulizar los datos en el archivo de json
 @app.route('/editar/', methods=['GET', 'POST'])
 @app.route('/editar/<int:blogId>', methods=['GET', 'POST'])
 def editar(blogId=0):
