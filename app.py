@@ -12,6 +12,7 @@ UPLOAD_FOLDER = os.path.abspath(os.getcwd()) + '\static\imagenes'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.secret_key = os.urandom(24)
 # Lee el archivo db.json y retorna el array ordenado por fecha
 # ordenadaFecha - la los datos  del archivo ordenados por fecha
 
