@@ -9,6 +9,7 @@ flask-wtf = "*"
 python-dotenv = "*"
 email-validator = "*"
 yagmail = "*"
+validate-email = "*"
 
 [dev-packages]
 

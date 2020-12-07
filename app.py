@@ -3,7 +3,7 @@ import os.path
 from collections import defaultdict
 from werkzeug.utils import secure_filename
 import yagmail as yagmail
-
+from datetime import datetime 
 import yagmail as yagmail
 from flask import Flask, flash, redirect, render_template, request, url_for
 from validate_email import validate_email
@@ -188,9 +188,9 @@ def isEmailValid(email):
 # Esta es asignada a la ruta "/recuperarPassword/"
 
 
-@app.route('/recuperarPassword/', methods=('GET', 'POST'))
+@app.route('/recuperarPassword', methods=('GET', 'POST'))
 def recuperarPassword():
-    ordenadaFecha = recientes()
+    ordenadaFecha = recientes() 
     if request.method == 'POST':
         email = request.form['mail']
         valid = isEmailValid(email)
@@ -204,6 +204,7 @@ def recuperarPassword():
             return render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
     else:
         return render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
+    return render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
 
 #Ruta para crear cuenta
 @app.route('/crearCuenta')
