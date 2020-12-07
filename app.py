@@ -6,6 +6,7 @@ from datetime import date
 from collections import defaultdict
 from werkzeug.utils import secure_filename
 
+
 UPLOAD_FOLDER =  os.path.abspath(os.getcwd()) + '\static\imagenes'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 app = Flask(__name__)
