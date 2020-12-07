@@ -1,23 +1,34 @@
 import json
 import os.path
 from collections import defaultdict
-from werkzeug.utils import secure_filename
-import yagmail as yagmail
-from datetime import datetime 
+from datetime import date, datetime
+
 import yagmail as yagmail
 from flask import Flask, flash, redirect, render_template, request, url_for
 from validate_email import validate_email
 from werkzeug.utils import secure_filename
+import re
 
 UPLOAD_FOLDER = os.path.abspath(os.getcwd()) + '\static\imagenes'
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+
+# Expresión regular que permite verificar la contraseña.
+# Puede contener cualquier letra minúscula y mayúscula
+# así como números enteros. Su longitud mínima debe ser de 8
+pass_reguex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\W_]{8,}$"
+# Expresión regular que permite verificar el usuario.
+# Debe contener cualquier letra minúscula y mayúscula
+# así como números enteros. Su longitud mínima debe ser de 8
+user_reguex = "^[a-zA-Z0-9_.-]{8,}$"
+
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = os.urandom(24)
-
 # Lee el archivo db.json y retorna el array ordenado por fecha
 # ordenadaFecha - la los datos  del archivo ordenados por fecha
+
+
 def recientes():
     if os.path.exists('db.json'):
         with open('db.json') as db:
@@ -31,6 +42,8 @@ def recientes():
 
 # Lee el archivo db.json y retorna la fila espesificada
 # row - la fila que se quiere obtener del archivo
+
+
 def query(row):
     if os.path.exists('db.json'):
         with open('db.json') as jdb:
@@ -39,6 +52,8 @@ def query(row):
 
 # retorna un nuevo id
 # id - nuevo id de bog
+
+
 def existe():
     if os.path.exists('db.json'):
         with open('db.json') as jdb:
@@ -53,17 +68,20 @@ def existe():
     return id
 
 # Escribe datos en db.json
+
+
 def write_json(data, filename='db.json'):
     with open(filename, 'w') as f:
         json.dump(data, f, indent=4)
 
 # limita las extensiones que se pueden subir
+
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-#rutara la pagina de index
 @app.route('/')
 def home():
     return render_template('index.html', titulo="Bienvenido")
@@ -89,7 +107,14 @@ def isPasswordValid(password):
     else:
         return False
 
-# ruta para la pagina de index, es la misma de login
+# login: función asignada a la ruta "/login" que admite los métodos GET and POST
+# de acuerdo a la configuración en index.html, se dejó por defecto el método POST
+# para enviar la información al servidor, esta recibe el usuario y contraseña y
+# los verfica con las funciones ya descritas anteriormente y devuelve errores si los hay
+# Cuando son correctos los datos, redirecciona a "/panelBlog"
+# En el caso de encontrar un error diferente, ejecuta el código bajo "except"
+
+
 @app.route("/login", methods=('GET', 'POST'))
 def login():
     try:
@@ -110,8 +135,7 @@ def login():
         return render_template("index.html")
 # fin código login
 
-#rutara la pagina de Crear blog
-#Toma los datos del formulario por get o por post los guarda en un dicionario y luego los escribe en un archivo de json
+
 @app.route('/crearBlog', methods=['GET', 'POST'])
 def crearBlog():
     ordenadaFecha = recientes()
@@ -140,19 +164,19 @@ def crearBlog():
                 return redirect('/paginaBlog/'+str(id))
     return render_template('crearBlog.html', titulo="Crear Blog", ordenadaFecha=ordenadaFecha)
 
-#Ruta para panel de blog
+
 @app.route('/panelBlog')
 def panelBlog():
     ordenadaFecha = recientes()
     return render_template('panelBlog.html', titulo="Panel de Blog", ordenadaFecha=ordenadaFecha)
 
-#Ruta para verficar correo
+
 @app.route('/verificarCorreo')
 def verificarCorreo():
-    ordenadaFecha = recientes()     
+    ordenadaFecha = recientes()
     return render_template('verificarCorreo.html', titulo="verificar Correo", ordenadaFecha=ordenadaFecha)
 
-#Ruta para pagina de blog
+
 @app.route('/paginaBlog/')
 @app.route('/paginaBlog/<int:blogId>')
 def paginaBlog(blogId=0):
@@ -160,13 +184,13 @@ def paginaBlog(blogId=0):
     ordenadaFecha = recientes()
     return render_template('paginaBlog.html', contenidoBlog=contenidoBlog, titulo=contenidoBlog["titulo"], ordenadaFecha=ordenadaFecha)
 
-#Ruta para resultados de busqueda
+
 @app.route('/resultadoBusqueda')
 def resultadoBusqueda():
     ordenadaFecha = recientes()
     return render_template('resultadoBusqueda.html', titulo="Resultado de busqueda", ordenadaFecha=ordenadaFecha)
 
-#Ruta para panel de usuario
+
 @app.route('/panelUsuario')
 def panelUsuario():
     ordenadaFecha = recientes()
@@ -188,9 +212,9 @@ def isEmailValid(email):
 # Esta es asignada a la ruta "/recuperarPassword/"
 
 
-@app.route('/recuperarPassword', methods=('GET', 'POST'))
+@app.route('/recuperarPassword/', methods=('GET', 'POST'))
 def recuperarPassword():
-    ordenadaFecha = recientes() 
+    ordenadaFecha = recientes()
     if request.method == 'POST':
         email = request.form['mail']
         valid = isEmailValid(email)
@@ -204,16 +228,70 @@ def recuperarPassword():
             return render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
     else:
         return render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
-    #return render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
 
-#Ruta para crear cuenta
-@app.route('/crearCuenta')
+
+# Inicio crear cuenta
+
+# isUsernameValid1: función que verifica basados
+# en la expresión regular definida anteriormente
+# que el usuario tenga caracteres permitidos
+
+
+def isUsernameValid1(user):
+    if re.search(user_reguex, user):
+        return True
+    else:
+        return False
+
+# isPasswordValid: función que verifica basados
+# en la expresión regular definida anteriormente
+# que la contraseña tenga caracteres permitidos
+
+
+def isPasswordValid(password):
+    if re.search(pass_reguex, password):
+        return True
+    else:
+        return False
+
+# crearCuenta: función que permite los métodos GET y POST,
+# cuando se hace un llamado se ejecuta el método GET y devuelve
+# la página principal "crearCuenta.html". Una vez se envíe
+# el formulario se ejecuta el método POST y una vez verificado el
+# usuario, la contraseña y el correo electrónico
+# se envía un mensaje desde la cuenta de Gmail
+# configurada al correo suministrado.
+# Esta es asignada a la ruta "/crearCuenta/"
+
+
+@app.route('/crearCuenta/', methods=('GET', 'POST'))
 def crearCuenta():
-    return render_template('crearCuenta.html', titulo="Crear cuenta")
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['mail']
+        password = request.form['pssw']
+        validuser = isUsernameValid1(name)
+        if validuser == False:
+            flash('Usuario inválido')
+            return render_template('crearCuenta.html', titulo="Crear Cuenta")
+        validpssw = isPasswordValid(password)
+        if validpssw == False:
+            flash('Contraseña inválida')
+            return render_template('crearCuenta.html', titulo="Crear Cuenta")
+        valid = isEmailValid(email)
+        if valid == True:
+            yag = yagmail.SMTP('uninortegrupo9b@gmail.com', 'unigrupob')
+            yag.send(to=email, subject='Activa tu cuenta',
+                     contents='Bienvenido '+name+', usa este vínculo para activar tu cuenta:')
+            return verificarCorreo()
+        else:
+            flash('Correo inválido')
+            return render_template('crearCuenta.html', titulo="Crear Cuenta")
+    else:
+        return render_template('crearCuenta.html', titulo="Crear cuenta")
+# Fin crear cuenta
 
-#Ruta para editar un blog
-#toma el id de blog por get o post y lo manda como parametro a query 
-#llena el formulario con la informacion retornada de query y da la opcion de actulizar los datos en el archivo de json
+
 @app.route('/editar/', methods=['GET', 'POST'])
 @app.route('/editar/<int:blogId>', methods=['GET', 'POST'])
 def editar(blogId=0):
