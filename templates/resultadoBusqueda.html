@@ -4,46 +4,29 @@
         <!--Main content-->
         <article role="article">
             <!--aqui va el contenido de la pagina-->
-            <h2>Resultados de búsqueda por categoria</h2>
+            <h2>Resultados de búsqueda</h2>
             <!--searh-->
+            <section class="content">
+                {% for message in get_flashed_messages() %}
+                <div class="flash">{{ message }}</div>
+                {% endfor %}
+            </section>
+            {% for resultado in resultados %}
             <article role="article">
-                <!--searh-->
-                <article role="article">
-                    <div class="grid1x2">
-                        <div class="imagen1x2">
-                            <figure class="figbusqueda">      
-                                <figcaption>Imagen que representa el contenido de este blog
-                                </figcaption>                          
-                                <img class="scaled" src="static/imagenes/webline-coding-html.jpg" alt="imagen del blog"  width=290px height=290px>
-                                
-                            </figure>
-                        </div>
-                        <div class="texto1x2">
-                            <h2 class="tituloBlog">Título del blog</h2>
-                            <p>Descripción general del blog... Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <li><button>LEER MÁS>></button></li>
-                        </div>
+                <div class="grid1x2">
+                    <div class="imagen1x2">                         
+                            <img class="scaled" src="static/imagenes/{{resultado['imagen']}}" alt="imagen del blog"  width=290px height=290px>
+                            
+                        </figure>
                     </div>
-                </article>
-                <article role="article">
-                    <div class="grid1x2">
-                        <div class="imagen1x2">
-                            <figure class="figbusqueda">  
-                                <figcaption>Imagen que representa el contenido de este blog
-                                </figcaption>                              
-                                <img class="scaled" src="static/imagenes/webline-coding-html.jpg" alt="imagen del blog" width=290px height=290px>
-                                
-                            </figure>
-                        </div>
-                        <div class="texto1x2">
-                            <h2 class="tituloBlog">Título del blog</h2>
-                            <p>Descripción general del blog... Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <li><button>LEER MÁS>></button></li>
-                        </div>
+                    <div class="texto1x2">
+                        <h2 class="tituloBlog">{{resultado['titulo']}}</h2>
+                        <p>{{resultado['contenido']}}</p>
+                        <li><button>LEER MÁS>></button></li>
                     </div>
-                </article>
+                </div>
+            </article>
+            {%endfor%}
     </main>
     </div>
 </body>

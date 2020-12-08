@@ -50,6 +50,20 @@ def query(row):
             db = json.load(jdb)
     return db[row]
 
+
+# Lee el archivo db.json y retorna un array de dictionarios que en el titulo tienen la palabra ingresada
+# palabra - palabra a buscar
+#resultados - array de dict con los matches
+def queryBuscar(pablara):
+    if os.path.exists('db.json'):
+        resultados=[]
+        with open('db.json') as jdb:
+            db = json.load(jdb)
+        for diccionario in db:
+            if pablara.upper() in diccionario['titulo'].upper():                
+                resultados.append(diccionario)
+    return resultados   
+
 # retorna un nuevo id
 # id - nuevo id de bog
 
@@ -184,11 +198,25 @@ def paginaBlog(blogId=0):
     ordenadaFecha = recientes()
     return render_template('paginaBlog.html', contenidoBlog=contenidoBlog, titulo=contenidoBlog["titulo"], ordenadaFecha=ordenadaFecha)
 
-
+# Da la ruta a resultados de busqueda por una palabra ingresada
+# Si la palabra no se encuentra en ninguno de los titulos se muestra un mensaje de error
+# Muestra la imagen y parte del contenido de los blogs buscados
 @app.route('/resultadoBusqueda')
-def resultadoBusqueda():
+@app.route('/resultadoBusqueda /<palabra>',methods=['GET', 'POST'])
+def resultadoBusqueda(palabra ="" ):
+    if request.method == "POST":
+        palabra =  request.form['Buscar']
+    else:
+       palabra =  request.args.get('Buscar')        
     ordenadaFecha = recientes()
-    return render_template('resultadoBusqueda.html', titulo="Resultado de busqueda", ordenadaFecha=ordenadaFecha)
+    resultados = queryBuscar(palabra)    
+    if not resultados or palabra == "":
+        resultados = []
+        flash('No hay resultados!')
+    else:  
+        for resultado in resultados:      
+            resultado['contenido'] = (resultado["contenido"][:200] + '...')
+    return render_template('resultadoBusqueda.html', titulo="Resultado de busqueda", ordenadaFecha=ordenadaFecha,resultados=resultados)
 
 
 @app.route('/panelUsuario')
