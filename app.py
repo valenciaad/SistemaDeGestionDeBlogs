@@ -3,9 +3,9 @@ import os.path
 from collections import defaultdict
 from datetime import date, datetime
 
-import yagmail as yagmail
+import yagmail as yagmail 
 from flask import Flask, flash, redirect, render_template, request, url_for
-from validate_email import validate_email
+# from validate_email import validate_email
 from werkzeug.utils import secure_filename
 import re
 
