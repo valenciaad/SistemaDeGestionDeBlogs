@@ -47,5 +47,12 @@
         "blogId": 6,
         "imagen": "6imagen1.png",
         "fecha": "07/12/2020,13:33:59"
+    },
+    {
+        "contenido": "Contenido ",
+        "titulo": "Titulo nuevo",
+        "blogId": 7,
+        "imagen": "75imagen4.png",
+        "fecha": "09/12/2020,13:38:48"
     }
 ]

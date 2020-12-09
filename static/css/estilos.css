@@ -328,6 +328,7 @@ border: 1px solid #d01137;
 .imagen1x2 {
   grid-area: imagen1x2;
   margin: 0  16px 10px; 
+  margin-top: 10px; 
   text-align: center;
   font-style: italic;
   font-size: smaller; 
