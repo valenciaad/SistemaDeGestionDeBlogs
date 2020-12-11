@@ -1,0 +1,27 @@
+#insertar datos en usuario
+insert INTO usuarios(nombre, correo,password,rol,estado) VALUES('NombreUsuario1','correoUsuario1@test.com','passwordUsuario1',1,true);
+
+#seleccionar usuario por id
+SELECT * FROM usuarios WHERE id_usuario = 1 AND estado = true;
+
+#insertar datos en blogs
+insert INTO blogs(titulo,contenido,fecha,categoria,id_usuario,estado) VALUES ('TituloBlog1','ContenidoBlog1','10/12/2020,10:33:00','categoria1',1,true);
+
+
+#seleciona blogs por id de blog
+SELECT * FROM blogs WHERE id_blog = 1 AND estado = true;
+
+#selecciona blog por id de usuairo
+SELECT * FROM blogs WHERE id_usuario= 1 AND estado = true;
+
+#seleciona blog recientes
+SELECT * FROM blogs WHERE estado = true ORDER BY fecha DESC limit 3 ;
+
+#insertar datos en comentarios
+insert INTO comentarios (id_blog,id_usuario, contenido,fecha) VALUES (1,1,'comentario1','10/12/2020,10:12:20')
+
+seleciona comentarios por id de blog
+SELECT * FROM comentarios WHERE id_blog = 1;
+
+
+#deshabilitar usuario

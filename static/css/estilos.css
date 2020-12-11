@@ -377,9 +377,8 @@ select {
 .misBlogs li{
   margin: 5%;
 }
-.misBlogs a{
- padding: 15px 35%;
- 
+.misBlogs a{ 
+ text-align: left;
 }
 
 

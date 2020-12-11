@@ -8,28 +8,17 @@
         <form>
             <label for="categoria">Selecciona categoría:</label>
             <select cat="categoria" name="categoria">
-                <option valuae="categoria1">Categoría 1</option>
-                <option valuae="categoria2">Categoría 2</option>
-                <option valuae="categoria3">Categoría 3</option>
-                <option valuae="categoria4">Categoría 4</option>
-                <option valuae="categoria5">Categoría 5</option>
-                <option valuae="categoria6">Categoría 6</option>
+                <option value="Noticias">Noticias</option>
+                <option value="Front End">Front End</option>
+                <option value="Back End">Back End</option>
             </select>
         </form>
-        <form>
-            <label for="orden">Orden:</label>
-            <select or="orden" name="orden">
-                <option value="orden1">Asendente</option>
-                <option value="orden2">Descendente</option>
-            </select>
-        </form>
+        
         <a href="/crearBlog" title="Crea un nuevo Blog" class ="boton">Crear Blog</a>
         <ul type="Circle" class ="misBlogs">
-            <li><a href="paginaBlog">Blog #1</a></li>
-            <li><a href="paginaBlog">Blog #2</a></li>
-            <li><a href="paginaBlog">Blog #3</a></li>
-            <li><a href="paginaBlog">Blog #4</a></li>
-            <li><a href="paginaBlog">Blog #5</a></li>
+            {% for blog in blogs %}
+            <li><a href="paginaBlog/{{blog['id_blog']}}">{{blog['titulo']}}</a></li>
+            {% endfor%}
         </ul > 
 
         

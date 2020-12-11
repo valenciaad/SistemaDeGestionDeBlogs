@@ -1,0 +1,17 @@
+{% extends 'base2por2.html' %}
+{%block header%}
+        <main id = "contenidoBlog" role="main"  class ="contenedor">   
+            <!--Main content-->         
+            <article role="article">
+                <!--aqui va el contenido de la pagina-->  
+            <h2 class ="titulo">Eliminar  Blog</h2>
+            <form method="POST"  enctype="multipart/form-data">
+            <h2>Se eliminara: {{contenidoBlog['titulo']}}</h2>            
+            <input type="submit" name="eliminar" id="upload" value="Eliminar">
+            </form>
+            </article>
+        </main>        
+      
+    </body>
+    </html>
+{%endblock%}

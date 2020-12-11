@@ -43,9 +43,9 @@
             </div>
             <aside >
                 <ul class="recientes">
-                    <li><a href="/paginaBlog/{{ordenadaFecha[0]['blogId']}}" title="Ve al blog reciente 1"><h3>{{ordenadaFecha[0]["titulo"]}}</h3><p>{{ordenadaFecha[0]["contenido"]}}</p></a></li>
-                    <li><a href="/paginaBlog/{{ordenadaFecha[1]['blogId']}}" title="Ve al blog reciente 1"><h3>{{ordenadaFecha[1]["titulo"]}}</h3><p>{{ordenadaFecha[1]["contenido"]}}</p></a></li>
-                    <li><a href="/paginaBlog/{{ordenadaFecha[2]['blogId']}}" title="Ve al blog reciente 1"><h3>{{ordenadaFecha[2]["titulo"]}}</h3><p>{{ordenadaFecha[2]["contenido"]}}</p></a></li>
+                    {% for blog in ordenadaFecha %}
+                    <li><a href="/paginaBlog/{{blog['id_blog']}}" title="Ve al blog reciente 1"><h3>{{blog["titulo"]}}</h3><p>{{blog["contenido"]}}</p></a></li>
+                    {% endfor %}
                 </ul>
             </aside>
         </section>        

@@ -8,27 +8,25 @@
                             <img src="../static/imagenes/{{contenidoBlog['imagen']}}" alt="imagen del blog" width="640" height="213">
                             <figcaption>Imagen que representa el contenido de este blog</figcaption>
                         </figure> 
-                        <p>{{contenidoBlog['contenido']}}</p>                        
+                        <p style = "white-space: pre-wrap;">{{contenidoBlog['contenido']}}</p>                        
                                           
                 </main>
                 <section class = "comentarios contenedor">
                     <!--comments-->
                     <h2>Comentarios:</h2>
-                    <form >
+                    <form action="/paginaBlog/{{contenidoBlog['id_blog']}}" method="POST">
                         <textarea  name="tComentario"  id="tComentario" placeholder="Escribe tu comentario ..."></textarea>
                         <br />
                         <input type="submit" name="Comentar" value="Comentar" class="boton" />
                     </form>
-                    <article class="comentario">
-                        <h3>Comentario1</h3>
-                        <p>Nombre de la persona 1</p>
-                        <p>Comentario de la persona 1</p>
-                    </article>
+                    
+                    {% for comentario in comentarios%}
                     <article class="comentario" >
-                        <h3>Comentario2</h3>
-                        <p>Nombre de la persona 2</p>
-                        <p>Comentario de la persona 2</p>
+                        <p>{{comentario['nombre']}}</p>
+                        <p>{{comentario['contenido']}}</p>
                     </article>
+                    {% endfor %}
+                    
                 </section>
             </article>
         <section class ="CEE contenedor" >
@@ -36,8 +34,8 @@
                 <!--tool bar-->
                 <ul class="herramientas" >
                     <li><a href="/crearBlog" title="Crea un nuevo Blog">Crear Blog</a></li>
-                    <li><a href="/editar/{{contenidoBlog['blogId']}}" title="Edita este Blog">Editar</a></li>
-                    <li><a href="Eliminar.html" title="Elimina este blog">Eliminar</a></li>
+                    <li><a href="/editar/{{contenidoBlog['id_blog']}}" title="Edita este Blog">Editar</a></li>
+                    <li><a href="/eliminar/{{contenidoBlog['id_blog']}}" title="Elimina este blog">Eliminar</a></li>
                 </ul>            
         </section>
     </body>
