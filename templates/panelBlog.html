@@ -5,13 +5,15 @@
         <!--Main content-->
 
         <h2>Mis blogs</h2>        
-        <form>
+        <form method="POST">
             <label for="categoria">Selecciona categoría:</label>
             <select cat="categoria" name="categoria">
+                <option value="Todas">Todas</option>
                 <option value="Noticias">Noticias</option>
                 <option value="Front End">Front End</option>
                 <option value="Back End">Back End</option>
             </select>
+            <input type="submit" name="filtar" id="filtar" value="filtar">
         </form>
         
         <a href="/crearBlog" title="Crea un nuevo Blog" class ="boton">Crear Blog</a>

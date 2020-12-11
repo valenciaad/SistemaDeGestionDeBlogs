@@ -6,16 +6,28 @@
             <!--aqui va el contenido de la pagina-->
             <h2>Resultados de búsqueda</h2>
             <!--searh-->
+            <form method="GET" >
+                <label for="categoria">Selecciona categoría:</label>
+                <select cat="categoria" name="categoria">
+                    <option value="Todas">Todas</option>
+                    <option value="Noticias">Noticias</option>
+                    <option value="Front End">Front End</option>
+                    <option value="Back End">Back End</option>
+                </select>
+                <input type="search" name="Buscar" id="Buscar" value="{{palabra}}"  hidden=true/> 
+                <input type="submit" name="filtar" id="filtar" value="filtar"  >
+            </form>
             <section class="content">
                 {% for message in get_flashed_messages() %}
                 <div class="flash">{{ message }}</div>
                 {% endfor %}
             </section>
+            
             {% for resultado in resultados %}
             <article role="article">
                 <div class="grid1x2">
                     <div class="imagen1x2">                         
-                            <img class="scaled" src="static/imagenes/{{resultado['imagen']}}" alt="imagen del blog"  width=200px height=200px>
+                            <img class="scaled" src="../static/imagenes/{{resultado['imagen']}}" alt="imagen del blog"  width=200px height=200px>
                             
                         </figure>
                     </div>

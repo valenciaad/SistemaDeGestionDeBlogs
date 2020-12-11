@@ -356,7 +356,13 @@ def crearBlog():
 @app.route('/panelBlog', methods=['GET', 'POST'])
 def panelBlog():
     ordenadaFecha = recientes()
-    blogObj = Blog.query.filter_by(id_usuario = 1, estado = 1)
+    categoria = "noticias"
+    if request.method == 'POST':
+        categoria = request.form["categoria"]
+    if categoria == "Todas":
+        blogObj = Blog.query.filter_by(id_usuario = 1, estado = 1)
+    else:
+        blogObj = Blog.query.filter_by(id_usuario = 1, estado = 1,categoria=categoria)
     blogs = esBlogs.dump(blogObj)
     return render_template('panelBlog.html',blogs = blogs, titulo="Panel de Blog", ordenadaFecha=ordenadaFecha)
 
@@ -394,22 +400,37 @@ def paginaBlog(blogId:int):
 # Da la ruta a resultados de busqueda por una palabra ingresada
 # Si la palabra no se encuentra en ninguno de los titulos se muestra un mensaje de error
 # Muestra la imagen y parte del contenido de los blogs buscados
-@app.route('/resultadoBusqueda')
+@app.route('/resultadoBusqueda/',methods=['GET', 'POST'])
 @app.route('/resultadoBusqueda /<palabra>',methods=['GET', 'POST'])
 def resultadoBusqueda(palabra ="" ):
+    categoria = "Todas"
+    ordenadaFecha = recientes()
     if request.method == "POST":
         palabra =  request.form['Buscar']
+        categoria = request.form["categoria"]
+    if request.method == "GET":
+       palabra =  request.args.get('Buscar')  
+       categoria  =  request.args.get('categoria')
+       if categoria == None:
+           categoria = "Todas"
+    print(palabra)
+    print(categoria)
+    if categoria != "Todas":
+        objetos = Blog.query.filter_by(estado = 1, categoria = categoria)
     else:
-       palabra =  request.args.get('Buscar')        
-    ordenadaFecha = recientes()
-    resultados = queryBuscar(palabra)    
+        objetos = Blog.query.filter_by(estado = 1)
+    db = esBlogs.dump(objetos)
+    resultados=[] 
+    for diccionario in db:
+         if palabra.upper() in diccionario['titulo'].upper()  and diccionario['estado'] == True:                
+             resultados.append(diccionario)
     if not resultados or palabra == "":
         resultados = []
         flash('No hay resultados!')
     else:  
         for resultado in resultados:      
             resultado['contenido'] = (resultado["contenido"][:200] + '...')
-    return render_template('resultadoBusqueda.html', titulo="Resultado de busqueda", ordenadaFecha=ordenadaFecha,resultados=resultados)
+    return render_template('resultadoBusqueda.html',palabra=palabra, titulo="Resultado de busqueda", ordenadaFecha=ordenadaFecha,resultados=resultados)
 
 
 @app.route('/panelUsuario')
