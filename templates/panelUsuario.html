@@ -5,13 +5,12 @@
             <article role="article">
                 <h2 class ="tituloBlog">Panel de usuario</h2>
                 <!--aqui va el contenido de la pagina-->                 
-                <form >
+                <form  method = "POST">
                     <label for="usuairos">Escoge un usuario:</label>
                     <select id="usuario" name="usuario">
-                          <option value="usuario1">usuario 1</option>
-                          <option value="usuario2">usuario 2</option>
-                          <option value="usuario3">usuario 3</option>
-                          <option value="usuario4">usuario 4</option>
+                        {% for usuario in usuarios %}
+                          <option value="{{usuario['id_usuario']}}">{{usuario['nombre']}}</option>
+                        {% endfor %}
                      </select>
                         <input type="submit"  value="Eliminar">
                  </form>  

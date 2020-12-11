@@ -159,7 +159,7 @@ class Comentario(db.Model):
 
 class EsquemaUsuario(ma.Schema):
     class Meta:
-        campos = ('id_usuario','nombre','correo','password','rol','estado','fecha')
+        fields = ('id_usuario','nombre','correo','password','rol','estado','fecha')
 
 
 class EsquemaBlog(ma.Schema):
@@ -433,10 +433,20 @@ def resultadoBusqueda(palabra ="" ):
     return render_template('resultadoBusqueda.html',palabra=palabra, titulo="Resultado de busqueda", ordenadaFecha=ordenadaFecha,resultados=resultados)
 
 
-@app.route('/panelUsuario')
+@app.route('/panelUsuario',methods=['GET', 'POST'])
 def panelUsuario():
     ordenadaFecha = recientes()
-    return render_template('panelUsuario.html', titulo="Panel de usuario", ordenadaFecha=ordenadaFecha)
+    objUsuarios = Usuario.query.filter_by(rol=0, estado = 1)
+    usuarios = esUsuarios.dump(objUsuarios)
+    if request.method == "POST":
+        usuario =   request.form['usuario']
+        print(usuario)
+        objUsuario = Usuario.query.filter_by(id_usuario = usuario ).first()
+        objUsuario.estado = False
+        db.session.commit()        
+        redirect('/panelUsario')
+        
+    return render_template('panelUsuario.html', usuarios=usuarios,titulo="Panel de usuario", ordenadaFecha=ordenadaFecha)
 
 # isEmailValid: Función que valida si es correcto un email usando el paquete validate_email
 
