@@ -424,7 +424,7 @@ def resultadoBusqueda(palabra ="" ):
     db = esBlogs.dump(objetos)
     resultados=[] 
     for diccionario in db:
-         if palabra.upper() in diccionario['titulo'].upper()  and diccionario['estado'] == True:                
+         if (palabra.upper() in diccionario['titulo'].upper()) or (palabra.upper() in diccionario['contenido'].upper())  and diccionario['estado'] == True:                
              resultados.append(diccionario)
     if not resultados or palabra == "":
         resultados = []
