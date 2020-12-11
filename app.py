@@ -356,9 +356,11 @@ def crearBlog():
 @app.route('/panelBlog', methods=['GET', 'POST'])
 def panelBlog():
     ordenadaFecha = recientes()
-    categoria = "noticias"
+    categoria = "Todas"
     if request.method == 'POST':
         categoria = request.form["categoria"]
+        if categoria == None:
+            categoria = "Todas"
     if categoria == "Todas":
         blogObj = Blog.query.filter_by(id_usuario = 1, estado = 1)
     else:
