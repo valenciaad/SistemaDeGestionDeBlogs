@@ -4,7 +4,8 @@
             <!--Main content-->         
             <article role="article">
                 <h2 class ="tituloBlog">Panel de usuario</h2>
-                <!--aqui va el contenido de la pagina-->                 
+                <!--aqui va el contenido de la pagina-->        
+                {% if admin%}         
                 <form  method = "POST">
                     <label for="usuairos">Escoge un usuario:</label>
                     <select id="usuario" name="usuario">
@@ -14,6 +15,7 @@
                      </select>
                         <input type="submit"  value="Eliminar">
                  </form>  
+                 {% endif %}
                  <ul class="opcionesUsuario">
                     <li><a href="/recuperarPassword" title="Ve al tu pandel de usuario">Cambiar o recumperar contraseña</a></li>
                     <li><a href="/paginaBlog/1" title="Ve al tu pandel de blog">Saber más</a></li>

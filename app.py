@@ -6,12 +6,14 @@ import yagmail as yagmail
 from flask import Flask, flash, redirect, render_template, request, url_for, jsonify
 from validate_email import validate_email
 from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash, check_password_hash
 import re
 #para alchemy
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer,String, Boolean, DateTime, ForeignKey
 import os
 from flask_marshmallow import Marshmallow
+from flask_login import LoginManager, UserMixin, login_user, login_required,logout_user, current_user
 
 
 UPLOAD_FOLDER = os.path.abspath(os.getcwd()) + '\static\imagenes'
@@ -31,6 +33,10 @@ app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir,'baseDatos.db')
 
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
 db  = SQLAlchemy(app)
 ma = Marshmallow(app)
 
@@ -48,10 +54,9 @@ def db_drop():
 def db_seed():
     admin = Usuario(nombre='Prueba',
                        correo = 'uninortegrupo9b@gmail.com',
-                       password = 'Prueba1234',
+                       #password = 'Prueba1234',
                        rol= 1,# 0 - usuario,  1 - admin
                        estado = True)
-
     adrian = Usuario(nombre='AdrianValencia',
                        correo = 'test1@test.com',
                        password = 'Prueba1234',
@@ -91,7 +96,7 @@ def db_seed():
     saber = Blog (titulo = 'Saber más',
                  contenido = """¿Quiénes somos? BLUSQUEDA es una aplicación web moderna, dinámica y de fácil acceso que te permitirá administrar, manejar, gestionar escritos (blogs) de interés sobre programación y tecnología. Útil para: Blogueros, profesores, estudiantes, emprendedores y profesionales. Personas que buscan compartir su sabiduría con personas que tienen un modo de pensar similar o curiosos interesados en expandir sus conocimientos en campos tan demandados en la actualidad como lo son el de la programación y la tecnología. ¿Cómo funciona?  Una vez registrado en nuestra plataforma, como usuario autenticado BLUSQUEDA te ofrece la opción de crear, actualizar y borrar blogs escritos por ti, o buscar, leer y comentar blogs públicos escritos por alguien más. Crear contenido es muy fácil, consulta Haz que más personas encuentren tu blog online, Pero si lo que buscas es ampliar tus conocimientos, buscar contenido es aún mucho más sencillo solo tienes que ingresar en el panel de búsqueda una palabra clave y listo se desplegarán todos los blogs con el contenido que estás buscando.¡BIENVENIDO A TU MEJOR EXPERIENCIA WEB!""",
                  categoria = 'noticias',
-                 id_usuario = 1,
+                 id = 1,
                  estado = True,
                  imagen = 'imagen0.jpg')
 
@@ -107,7 +112,7 @@ Captar y lograr la fidelización de los lectores dependerá en gran medida de qu
 Utiliza un diseño atractivo, muchos curiosos en busca de contenido vendrán y echarán un vistazo rápido a tu blog y si no les gusta el estilo probablemente se irán, pero si por el contrario logras en ellos una primera buena impresión, eso te ayudará a captar su atención.
 ¡BLUSQUEDA TE DESEA EXITOS!""",
                  categoria = 'noticias',
-                 id_usuario = 1,
+                 id = 1,
                  estado = True,
                  imagen = 'imagen1.jpg')
     db.session.add(saber)
@@ -115,7 +120,7 @@ Utiliza un diseño atractivo, muchos curiosos en busca de contenido vendrán y e
 
     comentario1 = Comentario(
                        id_blog = '1',
-                       id_usuario = '2',
+                       id = '2',
                        contenido= 'Esta es una prueba de comentarios'
                        )
     db.session.add(comentario1)
@@ -128,15 +133,23 @@ app.secret_key = os.urandom(24)
 # ordenadaFecha - la los datos  del archivo ordenados por fecha
 
 # modelos de  base de datos
-class Usuario(db.Model):
+class Usuario(db.Model,UserMixin):
     __tablename__ = 'usuarios'
-    id_usuario = Column (Integer,  primary_key = True, nullable=False)
+    id = Column (Integer,  primary_key = True, nullable=False)
     nombre = Column (String, nullable=False)
     correo = Column (String, unique=True, nullable=False)
     password = Column (String, nullable=False)
     rol = Column(Integer, nullable=False)
     estado = Column(Boolean, nullable=False)
     fecha = Column (DateTime, nullable=False,default=datetime.utcnow)
+    def set_password(self,password):
+        self.password = generate_password_hash(password)    
+    def get_password(self,password):
+        return check_password_hash(self.password, password)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return Usuario.query.filter_by(id=user_id).first()
 
 class Blog(db.Model):
     __tablename__ = 'blogs'
@@ -145,7 +158,7 @@ class Blog(db.Model):
     contenido = Column (String, nullable=False)
     fecha = Column (DateTime, nullable=False,default=datetime.utcnow)
     categoria = Column (String, nullable=False)
-    id_usuario = Column(Integer,ForeignKey('usuarios.id_usuario') ,nullable=False)
+    id = Column(Integer,ForeignKey('usuarios.id') ,nullable=False)
     estado = Column(Boolean, nullable=False)
     imagen = Column (String, unique=True,nullable=False)
     
@@ -153,22 +166,22 @@ class Comentario(db.Model):
     __tablename__ = 'comentarios'
     id_comentario = Column (Integer,  primary_key = True, nullable=False)
     id_blog = Column(Integer,ForeignKey('blogs.id_blog') ,nullable=False)
-    id_usuario = Column(Integer,ForeignKey('usuarios.id_usuario') ,nullable=False)
+    id = Column(Integer,ForeignKey('usuarios.id') ,nullable=False)
     contenido = Column (String, nullable=False)
     fecha = Column (DateTime, nullable=False,default=datetime.utcnow)
 
 class EsquemaUsuario(ma.Schema):
     class Meta:
-        fields = ('id_usuario','nombre','correo','password','rol','estado','fecha')
+        fields = ('id','nombre','correo','password','rol','estado','fecha')
 
 
 class EsquemaBlog(ma.Schema):
     class Meta:
-        fields = ('id_blog','titulo','contenido','fecha','categoria','id_usuario','estado','imagen')
+        fields = ('id_blog','titulo','contenido','fecha','categoria','id','estado','imagen')
 
 class EsquemaComentario(ma.Schema):
     class Meta:
-        fields = ('id_comentario','id_blog','id_usuario','contenido','fecha')
+        fields = ('id_comentario','id_blog','id','contenido','fecha')
 
 class EsquemaComentarioUS(ma.Schema):
     class Meta:
@@ -185,7 +198,7 @@ esComentarios = EsquemaComentario(many=True)
 esComenUS = EsquemaComentarioUS(many=True)
 
 def recientes():
-    objetos = Blog.query.filter_by(estado = 1)
+    objetos = Blog.query.filter_by(estado = 1).limit(5)
     ordenadaFecha = esBlogs.dump(objetos)
     ordenadaFecha.sort(reverse=True, key=lambda x: datetime.strptime(
                 x['fecha'], '%Y-%m-%dT%H:%M:%S.%f'))
@@ -295,23 +308,38 @@ def isPasswordValid(password):
 
 @app.route("/login", methods=('GET', 'POST'))
 def login():
-    try:
-        username = request.args.get('user')
-        password = request.args.get('pssw')
-        error = None
-        if not isUsernameValid(username):
-            error = "Usuario incorrecto"
+    #try:
+        username = request.form.get('user')
+        password = request.form.get('pssw')
+        error = None        
+        usuario = Usuario.query.filter_by(nombre = username ).first()
+        #print(usuario)
+        if usuario and usuario.get_password(password):
+            login_user(usuario) 
+            return  redirect("/panelBlog")
+        else:
+            error = "Usuario o contraseña incorrecto"
             flash(error)
             return render_template("index.html")
-        if not isPasswordValid(password):
-            error = "Contraseña incorrecta"
-            flash(error)
-            return render_template("index.html")
-        return panelBlog()
-    except:
-        flash("Error en el inicio de sesión")
-        return render_template("index.html")
+        #if not isUsernameValid(username):
+         #   error = "Usuario incorrecto"
+         #   flash(error)
+         #   return render_template("index.html")
+        #if not isPasswordValid(password):
+         #   error = "Contraseña incorrecta"
+          #  flash(error)
+           # return render_template("index.html")
+        
+   # except:
+        #flash("Error en el inicio de sesión")
+        #return render_template("index.html")
 # fin código login
+
+@app.route("/logout", methods=('GET', 'POST'))
+@login_required
+def logout():
+    logout_user()
+    return render_template("index.html")
 
 
 @app.route('/crearBlog', methods=['GET', 'POST'])
@@ -333,7 +361,7 @@ def crearBlog():
         blogC = Blog (titulo = titulo,
                  contenido = contenido,
                  categoria = categoria,
-                 id_usuario = 1,
+                 id = current_user.id,
                  estado = True,
                  imagen = nombreImagen)
         db.session.add(blogC)
@@ -354,17 +382,20 @@ def crearBlog():
 
 
 @app.route('/panelBlog', methods=['GET', 'POST'])
+@login_required
 def panelBlog():
     ordenadaFecha = recientes()
     categoria = "Todas"
+    id = current_user.id
+    
     if request.method == 'POST':
         categoria = request.form["categoria"]
         if categoria == None:
             categoria = "Todas"
     if categoria == "Todas":
-        blogObj = Blog.query.filter_by(id_usuario = 1, estado = 1)
+        blogObj = Blog.query.filter_by(id = id, estado = 1)
     else:
-        blogObj = Blog.query.filter_by(id_usuario = 1, estado = 1,categoria=categoria)
+        blogObj = Blog.query.filter_by(id = id, estado = 1,categoria=categoria)
     blogs = esBlogs.dump(blogObj)
     return render_template('panelBlog.html',blogs = blogs, titulo="Panel de Blog", ordenadaFecha=ordenadaFecha)
 
@@ -377,33 +408,39 @@ def verificarCorreo():
 
 @app.route('/paginaBlog/', methods=['GET', 'POST'])
 @app.route('/paginaBlog/<int:blogId>', methods=['GET', 'POST'])
+@login_required
 def paginaBlog(blogId:int):
     blogObj = Blog.query.filter_by(id_blog = blogId).first()
     #blogObj = Blog.query.all()    
+    usuario = current_user
     contenidoBlog  = esBlog.dump(blogObj) 
     ordenadaFecha = recientes()
+    propio = False
+    if blogObj.id == usuario.id:
+        propio = True
     if request.method == 'POST':
         contenido = request.form["tComentario"]
         id_blog =  blogId
-        id_usuario = 1
+        id = usuario.id
         comentario1 = Comentario(
                        id_blog = id_blog,
-                       id_usuario = id_usuario,
+                       id = id,
                        contenido= contenido
                        )
         db.session.add(comentario1)
         db.session.commit()        
         return redirect('/paginaBlog/'+str(blogObj.id_blog))
-    comentrioOdjetos = db.engine.execute("SELECT id_comentario,  u.nombre ,contenido from comentarios, usuarios as u WHERE id_blog = " + str(blogId) +" and u.id_usuario =1") #Comentario.query.filter_by(id_blog = blogId).all()
+    comentrioOdjetos = db.engine.execute("SELECT id_comentario,  usuarios.nombre ,contenido, usuarios.id from comentarios c inner join usuarios  on  c.id_blog = " + str(blogId) + " and usuarios.id = c.id")
     comentarios = esComenUS.dump(comentrioOdjetos)
     #print(comentarios)   
-    return render_template('paginaBlog.html', comentarios =comentarios,contenidoBlog=contenidoBlog, titulo=contenidoBlog['titulo'], ordenadaFecha=ordenadaFecha)
+    return render_template('paginaBlog.html', propio = propio, comentarios =comentarios,contenidoBlog=contenidoBlog, titulo=contenidoBlog['titulo'], ordenadaFecha=ordenadaFecha)
 
 # Da la ruta a resultados de busqueda por una palabra ingresada
 # Si la palabra no se encuentra en ninguno de los titulos se muestra un mensaje de error
 # Muestra la imagen y parte del contenido de los blogs buscados
 @app.route('/resultadoBusqueda/',methods=['GET', 'POST'])
 @app.route('/resultadoBusqueda /<palabra>',methods=['GET', 'POST'])
+@login_required
 def resultadoBusqueda(palabra ="" ):
     categoria = "Todas"
     ordenadaFecha = recientes()
@@ -436,19 +473,26 @@ def resultadoBusqueda(palabra ="" ):
 
 
 @app.route('/panelUsuario',methods=['GET', 'POST'])
+@login_required
 def panelUsuario():
+    admin = False    
+    if current_user.rol == 1:
+        admin = True
     ordenadaFecha = recientes()
     objUsuarios = Usuario.query.filter_by(rol=0, estado = 1)
     usuarios = esUsuarios.dump(objUsuarios)
+    
+
     if request.method == "POST":
         usuario =   request.form['usuario']
         print(usuario)
-        objUsuario = Usuario.query.filter_by(id_usuario = usuario ).first()
+        objUsuario = Usuario.query.filter_by(id = usuario ).first()
         objUsuario.estado = False
-        db.session.commit()        
+        db.session.commit()                
         redirect('/panelUsario')
         
-    return render_template('panelUsuario.html', usuarios=usuarios,titulo="Panel de usuario", ordenadaFecha=ordenadaFecha)
+        
+    return render_template('panelUsuario.html', admin=admin,usuarios=usuarios,titulo="Panel de usuario", ordenadaFecha=ordenadaFecha)
 
 # isEmailValid: Función que valida si es correcto un email usando el paquete validate_email
 
@@ -524,14 +568,7 @@ def crearCuenta():
         name = request.form['name']
         email = request.form['mail']
         password = request.form['pssw']
-        validuser = isUsernameValid1(name)
-        nuevoUsuario= Usuario(nombre=name,
-                       correo = email,
-                       password = password,
-                       rol= 0, # 0 - usuario,  1 - admin
-                       estado = True)
-        db.session.add(nuevoUsuario)
-        db.session.commit()
+        validuser = isUsernameValid1(name)        
         if validuser == False:
             flash('Usuario inválido')
             return render_template('crearCuenta.html', titulo="Crear Cuenta")
@@ -544,6 +581,14 @@ def crearCuenta():
             yag = yagmail.SMTP('uninortegrupo9b@gmail.com', 'unigrupob')
             yag.send(to=email, subject='Activa tu cuenta',
                      contents='Bienvenido '+name+', usa este vínculo para activar tu cuenta:')
+            nuevoUsuario= Usuario(nombre=name,
+                       correo = email,
+                       #password = password,
+                       rol= 0, # 0 - usuario,  1 - admin
+                       estado = True)
+            nuevoUsuario.set_password(password)
+            db.session.add(nuevoUsuario)
+            db.session.commit()
             return verificarCorreo()
         else:
             flash('Correo inválido')
@@ -555,52 +600,60 @@ def crearCuenta():
 
 @app.route('/editar/', methods=['GET','PUT', 'POST'])
 @app.route('/editar/<int:blogId>', methods=['GET','PUT', 'POST'])
+@login_required
 def editar(blogId=0):
     ordenadaFecha = recientes()
     objeto = Blog.query.filter_by(id_blog = blogId).first()
-    contenidoBlog = esBlog.dump(objeto) 
-    #now = datetime.now()
-    fecha = datetime.utcnow()
-    nombreImagen = contenidoBlog['imagen']
-    if request.method == 'POST':
-        contenido = request.form["cuerpoBlog"]
-        titulo = request.form["titulo"]
-        categoria = request.form["categorias"]
-        if request.files["subirImagen"] != None:
-            imagen = request.files["subirImagen"]
-            if imagen and allowed_file(imagen.filename):
-                nombreImagen = secure_filename(str(id)+imagen.filename)
-                imagen.save(os.path.join(
-                    app.config['UPLOAD_FOLDER'], nombreImagen))
-        objeto.contenido = contenido
-        objeto.titulo=titulo
-        objeto.imagen=nombreImagen
-        objeto.fecha=fecha
-        objeto.categoria=categoria
-        db.session.commit()
-        return redirect('/paginaBlog/'+str(objeto.id_blog))
-        #cuerpo = {"contenido": contenido,
-        #          "titulo": titulo,
-        #          "blogId": blogId,
-        #          "imagen": nombreImagen,
-        #          "fecha": fecha}
-        #if (id != None and contenido != None):
-        #    with open('db.json') as jdb:
-        #        db = json.load(jdb)
-        #        db[blogId] = cuerpo
-        #        write_json(db)             
+    if objeto.id == current_user.id:
+        contenidoBlog = esBlog.dump(objeto) 
+        #now = datetime.now()
+        fecha = datetime.utcnow()
+        nombreImagen = contenidoBlog['imagen']
+        if request.method == 'POST':
+            contenido = request.form["cuerpoBlog"]
+            titulo = request.form["titulo"]
+            categoria = request.form["categorias"]
+            if request.files["subirImagen"] != None:
+                imagen = request.files["subirImagen"]
+                if imagen and allowed_file(imagen.filename):
+                    nombreImagen = secure_filename(str(id)+imagen.filename)
+                    imagen.save(os.path.join(
+                        app.config['UPLOAD_FOLDER'], nombreImagen))
+            objeto.contenido = contenido
+            objeto.titulo=titulo
+            objeto.imagen=nombreImagen
+            objeto.fecha=fecha
+            objeto.categoria=categoria
+            db.session.commit()
+            return redirect('/paginaBlog/'+str(objeto.id_blog))
+            #cuerpo = {"contenido": contenido,
+            #          "titulo": titulo,
+            #          "blogId": blogId,
+            #          "imagen": nombreImagen,
+            #          "fecha": fecha}
+            #if (id != None and contenido != None):
+            #    with open('db.json') as jdb:
+            #        db = json.load(jdb)
+            #        db[blogId] = cuerpo
+            #        write_json(db)         
+    else:
+        return redirect("/panelBlog")    
 
     return render_template('editar.html', titulo="Editar", ordenadaFecha=ordenadaFecha, contenidoBlog=contenidoBlog)
 
 @app.route('/eliminar/', methods=['GET','PUT', 'POST'])
 @app.route('/eliminar/<int:blogId>', methods=['GET','PUT', 'POST'])
+@login_required
 def eliminar(blogId=0):
     ordenadaFecha = recientes()
     objeto = Blog.query.filter_by(id_blog = blogId).first()
-    contenidoBlog = esBlog.dump(objeto)
-    if request.method == 'POST':
-        estado = False
-        objeto.estado=estado
-        db.session.commit()
+    if objeto.id == current_user.id:
+        contenidoBlog = esBlog.dump(objeto)
+        if request.method == 'POST':
+            estado = False
+            objeto.estado=estado
+            db.session.commit()
+            return redirect('/panelBlog')
+    else:
         return redirect('/panelBlog')
     return render_template('eliminar.html', titulo="Eliminar", ordenadaFecha=ordenadaFecha, contenidoBlog=contenidoBlog)

@@ -29,6 +29,7 @@
                     
                 </section>
             </article>
+        {% if propio %}
         <section class ="CEE contenedor" >
             <h2>Barra de herminetas</h2>
                 <!--tool bar-->
@@ -38,6 +39,7 @@
                     <li><a href="/eliminar/{{contenidoBlog['id_blog']}}" title="Elimina este blog">Eliminar</a></li>
                 </ul>            
         </section>
+        {% endif %}
     </body>
     </html>
 {%endblock%}
