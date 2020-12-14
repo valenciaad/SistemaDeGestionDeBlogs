@@ -3,7 +3,7 @@ import os.path
 from collections import defaultdict
 from datetime import date, datetime
 import yagmail as yagmail 
-from flask import Flask, flash, redirect, render_template, request, url_for, jsonify
+from flask import Flask, flash, redirect, render_template, request, url_for, jsonify, make_response
 from validate_email import validate_email
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -15,6 +15,7 @@ import os
 from flask_marshmallow import Marshmallow
 from flask_login import LoginManager, UserMixin, login_user, login_required,logout_user, current_user
 import random
+import pdfkit
 
 UPLOAD_FOLDER = os.path.abspath(os.getcwd()) + '\static\imagenes'
 
@@ -32,8 +33,12 @@ user_reguex = "^[a-zA-Z0-9_.-]{8,}$"
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir,'baseDatos.db')
-
-
+#C:\Users\adria\.virtualenvs\SistemaDeGestionDeBlogs-Mr4h8l_d\Lib\site-packages\wkhtmltopdf\bin
+path_wkhtmltopdf = os.path.abspath(os.getcwd()) + '\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
+config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+wkhtmltopdf_options =  {
+    'enable-local-file-access': "",
+}
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -417,7 +422,18 @@ def validacion(validacion=''):
     else:
         return 'Codigo invalido'
         
-
+@app.route('/descagar/<int:blogId>', methods=['GET', 'POST'])
+@login_required
+def descagar(blogId:int):
+    blogObj = Blog.query.filter_by(id_blog = blogId).first()
+    contenidoBlog  = esBlog.dump(blogObj) 
+    rendered   = render_template('descarga.html',  contenidoBlog=contenidoBlog, titulo=contenidoBlog['titulo'])
+    pdf = pdfkit.from_string(rendered, False, css='static/css/estilos.css', configuration=config,options = wkhtmltopdf_options)
+    response = make_response(pdf)
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['content-Disposition'] = 'inline; filename=archivo.pdf'
+    return response
+    #return render_template('descarga.html',  contenidoBlog=contenidoBlog, titulo=contenidoBlog['titulo'])
 
 @app.route('/paginaBlog/', methods=['GET', 'POST'])
 @app.route('/paginaBlog/<int:blogId>', methods=['GET', 'POST'])
@@ -431,6 +447,7 @@ def paginaBlog(blogId:int):
     propio = False
     if blogObj.id == usuario.id:
         propio = True
+    
     if request.method == 'POST':
         contenido = request.form["tComentario"]
         id_blog =  blogId
@@ -445,6 +462,7 @@ def paginaBlog(blogId:int):
         return redirect('/paginaBlog/'+str(blogObj.id_blog))
     comentrioOdjetos = db.engine.execute("SELECT id_comentario,  usuarios.nombre ,contenido, usuarios.id from comentarios c inner join usuarios  on  c.id_blog = " + str(blogId) + " and usuarios.id = c.id")
     comentarios = esComenUS.dump(comentrioOdjetos)
+    
     #print(comentarios)   
     return render_template('paginaBlog.html', propio = propio, comentarios =comentarios,contenidoBlog=contenidoBlog, titulo=contenidoBlog['titulo'], ordenadaFecha=ordenadaFecha)
 

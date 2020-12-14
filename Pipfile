@@ -13,6 +13,9 @@ validate-email = "*"
 flask-sqlalchemy = "*"
 flask-marshmallow = "*"
 flask-login = "*"
+pdfkit = "*"
+install = "*"
+wkhtmltopdf = "*"
 
 [dev-packages]
 
