@@ -343,6 +343,7 @@ def logout():
 
 
 @app.route('/crearBlog', methods=['GET', 'POST'])
+@login_required
 def crearBlog():
     ordenadaFecha = recientes()
     #id = existe()
@@ -355,7 +356,7 @@ def crearBlog():
         imagen = request.files["subirImagen"]
         categoria = request.form["categorias"]
         if imagen and allowed_file(imagen.filename):
-            nombreImagen = secure_filename(str(id)+imagen.filename)
+            nombreImagen = secure_filename(str(current_user.nombre)+imagen.filename)
             imagen.save(os.path.join(
                 app.config['UPLOAD_FOLDER'], nombreImagen))
         blogC = Blog (titulo = titulo,
