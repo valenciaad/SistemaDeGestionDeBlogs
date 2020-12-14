@@ -216,6 +216,7 @@ main p{
 }
 #Buscar{
   width: 70%;
+  border-radius: 15px;
 }
 .barraBusqueda input[type="submit"]{
   width: auto;

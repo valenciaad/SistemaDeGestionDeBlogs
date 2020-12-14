@@ -14,7 +14,7 @@ from sqlalchemy import Column, Integer,String, Boolean, DateTime, ForeignKey
 import os
 from flask_marshmallow import Marshmallow
 from flask_login import LoginManager, UserMixin, login_user, login_required,logout_user, current_user
-
+import random
 
 UPLOAD_FOLDER = os.path.abspath(os.getcwd()) + '\static\imagenes'
 
@@ -142,6 +142,7 @@ class Usuario(db.Model,UserMixin):
     rol = Column(Integer, nullable=False)
     estado = Column(Boolean, nullable=False)
     fecha = Column (DateTime, nullable=False,default=datetime.utcnow)
+    validacion = Column(String)
     def set_password(self,password):
         self.password = generate_password_hash(password)    
     def get_password(self,password):
@@ -401,10 +402,21 @@ def panelBlog():
     return render_template('panelBlog.html',blogs = blogs, titulo="Panel de Blog", ordenadaFecha=ordenadaFecha)
 
 
-@app.route('/verificarCorreo')
+@app.route('/verificarCorreo<validacion>')
 def verificarCorreo():
     ordenadaFecha = recientes()
+    
     return render_template('verificarCorreo.html', titulo="verificar Correo", ordenadaFecha=ordenadaFecha)
+
+@app.route('/validacion/<validacion>')
+def validacion(validacion=''):
+    usuario = Usuario.query.filter_by(validacion =validacion ).first()
+    if usuario:
+         login_user(usuario)
+         return redirect('/panelBlog')
+    else:
+        return 'Codigo invalido'
+        
 
 
 @app.route('/paginaBlog/', methods=['GET', 'POST'])
@@ -518,9 +530,12 @@ def recuperarPassword():
         email = request.form['mail']
         valid = isEmailValid(email)
         if valid == True:
+            usuario = Usuario.query.filter_by(correo = email).first()
+            usuario.validacion = random.randint(1000,10000)
+            db.session.commit()
             yag = yagmail.SMTP('uninortegrupo9b@gmail.com', 'unigrupob')
             yag.send(to=email, subject='Activa tu cuenta',
-                     contents='Bienvenido, usa este vínculo para activar tu cuenta ('+request.method+')')
+                     contents='Bienvenido, usa este vínculo para recuperar  tu contraseña: http://127.0.0.1:5000/recuperar/'+str(usuario.validacion))
             return verificarCorreo()
         else:
             flash('Correo inválido')
@@ -528,7 +543,19 @@ def recuperarPassword():
     else:
         return render_template('recuperarPassword.html', titulo="Recuperar contraseña", ordenadaFecha=ordenadaFecha)
 
-
+@app.route('/recuperar/<validacion>', methods=('GET', 'POST'))
+def recuperar(validacion=''):
+    usuario = Usuario.query.filter_by(validacion = validacion).first()
+    print(usuario)
+    if usuario:
+        if request.method == "POST":
+            nueva = request.form['pssw']
+            usuario.set_password(nueva)
+            db.session.commit()
+            return redirect('/login')
+    else:
+        return "Codigo invalido"
+    return render_template('recuperar.html')
 # Inicio crear cuenta
 
 # isUsernameValid1: función que verifica basados
@@ -578,18 +605,19 @@ def crearCuenta():
             flash('Contraseña inválida')
             return render_template('crearCuenta.html', titulo="Crear Cuenta")
         valid = isEmailValid(email)
-        if valid == True:
-            yag = yagmail.SMTP('uninortegrupo9b@gmail.com', 'unigrupob')
-            yag.send(to=email, subject='Activa tu cuenta',
-                     contents='Bienvenido '+name+', usa este vínculo para activar tu cuenta:')
+        if valid == True:            
             nuevoUsuario= Usuario(nombre=name,
                        correo = email,
                        #password = password,
                        rol= 0, # 0 - usuario,  1 - admin
                        estado = True)
+            nuevoUsuario.validacion = random.randint(1000,10000)
             nuevoUsuario.set_password(password)
             db.session.add(nuevoUsuario)
             db.session.commit()
+            yag = yagmail.SMTP('uninortegrupo9b@gmail.com', 'unigrupob')
+            yag.send(to=email, subject='Activa tu cuenta',
+                     contents='Bienvenido '+name+', usa este vínculo para activar tu cuenta: http://127.0.0.1:5000/validacion/'+ str (nuevoUsuario.validacion) )
             return verificarCorreo()
         else:
             flash('Correo inválido')

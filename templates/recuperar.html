@@ -1,0 +1,23 @@
+{% extends 'base2por1.html' %}
+{%block header%}
+<main id="contenidoBlog" role="main" class="contenedor">
+    <h2>Bienvenido</h2>
+    <article role="article">
+        <h2>Escribe una nueva contraseña</h2>
+        <form name="recuperar" action="" method="POST">
+            <input type="password" name="pssw" id="id_pssw" placeholder="Contraseña"><br><br>
+            <input type="submit" value="Cambiar">
+        </form>
+        <div>
+            <section class="content">
+                {% for message in get_flashed_messages() %}
+                <div class="flash">{{ message }}</div>
+                {% endfor %}
+            </section>
+        </div>
+    </article>
+</main>
+</body>
+
+</html>
+{%endblock%}
