@@ -15,6 +15,11 @@
                      </select>
                         <input type="submit"  value="Eliminar">
                  </form>  
+                 <section class="content">
+                    {% for message in get_flashed_messages() %}
+                    <div class="flash">{{ message }}</div>
+                    {% endfor %}
+                </section>
                  {% endif %}
                  <ul class="opcionesUsuario">
                     <li><a href="/recuperarPassword" title="Ve al tu pandel de usuario">Cambiar o recumperar contraseña</a></li>

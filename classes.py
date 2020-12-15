@@ -41,6 +41,7 @@ class Blog(db.Model):
     id = Column(Integer,ForeignKey('usuarios.id') ,nullable=False)
     estado = Column(Boolean, nullable=False)
     imagen = Column (String, unique=True,nullable=False)
+    publico = Column(Boolean)
     
 class Comentario(db.Model):
     __tablename__ = 'comentarios'

@@ -21,7 +21,7 @@ UPLOAD_FOLDER = os.path.abspath(os.getcwd()) + '\static\imagenes'
 path_wkhtmltopdf = os.path.abspath(os.getcwd()) + '\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
 config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
 wkhtmltopdf_options =  {
-    'enable-local-file-access': "",
+    'enable-local-file-access': None,
 }
 
 @pages.cli.command('db_crear')
@@ -172,6 +172,11 @@ def crearBlog():
         titulo = request.form["titulo"]
         imagen = request.files["subirImagen"]
         categoria = request.form["categorias"]
+        publico = publico = request.form.get('publico')
+        if publico == None:
+            publico = False
+        else:
+            publico = True
         nombreImagen = ""
         if imagen and allowed_file(imagen.filename):
             nombreImagen = secure_filename(str(current_user.nombre)+imagen.filename)
@@ -184,7 +189,8 @@ def crearBlog():
                  categoria = categoria,
                  id = current_user.id,
                  estado = True,
-                 imagen = nombreImagen)
+                 imagen = nombreImagen,
+                 publico = publico)
         db.session.add(blogC)
         db.session.commit()        
         return redirect('/paginaBlog/'+str(blogC.id_blog))
@@ -252,33 +258,65 @@ def descagar(blogId:int):
 @pages.route('/paginaBlog/', methods=['GET', 'POST'])
 @pages.route('/paginaBlog/<int:blogId>', methods=['GET', 'POST'])
 @login_required
-def paginaBlog(blogId:int):
-    blogObj = Blog.query.filter_by(id_blog = blogId).first()
-    #blogObj = Blog.query.all()    
-    usuario = current_user
-    contenidoBlog  = esBlog.dump(blogObj) 
-    ordenadaFecha = recientes()
-    propio = False
-    if blogObj.id == usuario.id:
-        propio = True
-    
-    if request.method == 'POST':
-        contenido = request.form["tComentario"]
-        id_blog =  blogId
-        id = usuario.id
-        comentario1 = Comentario(
-                       id_blog = id_blog,
-                       id = id,
-                       contenido= contenido
-                       )
-        db.session.add(comentario1)
-        db.session.commit()        
-        return redirect('/paginaBlog/'+str(blogObj.id_blog))
-    comentrioOdjetos = db.engine.execute("SELECT id_comentario,  usuarios.nombre ,contenido, usuarios.id from comentarios c inner join usuarios  on  c.id_blog = " + str(blogId) + " and usuarios.id = c.id")
-    comentarios = esComenUS.dump(comentrioOdjetos)
+def paginaBlog(blogId= None):
+    try:
+        blogObj = Blog.query.filter_by(id_blog = blogId).first()
+        #blogObj = Blog.query.all()    
+        usuario = current_user
+        if blogObj.publico:
+            contenidoBlog  = esBlog.dump(blogObj) 
+            ordenadaFecha = recientes()
+            propio = False
+            if blogObj.id == usuario.id:
+                propio = True
+            
+            if request.method == 'POST':
+                contenido = request.form["tComentario"]
+                id_blog =  blogId
+                id = usuario.id
+                comentario1 = Comentario(
+                            id_blog = id_blog,
+                            id = id,
+                            contenido= contenido
+                            )
+                db.session.add(comentario1)
+                db.session.commit()        
+                return redirect('/paginaBlog/'+str(blogObj.id_blog))
+            comentrioOdjetos = db.engine.execute("SELECT id_comentario,  usuarios.nombre ,contenido, usuarios.id from comentarios c inner join usuarios  on  c.id_blog = " + str(blogId) + " and usuarios.id = c.id")
+            comentarios = esComenUS.dump(comentrioOdjetos)
+        elif blogObj.publico == False and (usuario.id == blogObj.id):
+            flash("Este blog es privado")
+            contenidoBlog  = esBlog.dump(blogObj) 
+            ordenadaFecha = recientes()
+            propio = False
+            if blogObj.id == usuario.id:
+                propio = True
+            
+            if request.method == 'POST':
+                contenido = request.form["tComentario"]
+                id_blog =  blogId
+                id = usuario.id
+                comentario1 = Comentario(
+                            id_blog = id_blog,
+                            id = id,
+                            contenido= contenido
+                            )
+                db.session.add(comentario1)
+                db.session.commit()        
+                return redirect('/paginaBlog/'+str(blogObj.id_blog))
+            comentrioOdjetos = db.engine.execute("SELECT id_comentario,  usuarios.nombre ,contenido, usuarios.id from comentarios c inner join usuarios  on  c.id_blog = " + str(blogId) + " and usuarios.id = c.id")
+            comentarios = esComenUS.dump(comentrioOdjetos)
+        else:
+            return "<h1>Este blog no es publico <h1>"
+        if blogId == None:
+            flash("Ups!! Algo salido mal")
+            return redirect('/panelUsuario')
+        return render_template('paginaBlog.html', propio = propio, comentarios =comentarios,contenidoBlog=contenidoBlog, titulo=contenidoBlog['titulo'], ordenadaFecha=ordenadaFecha)
+    except: 
+        flash("Ups!! Algo salido mal")
+        return redirect('/panelUsuario')       
     
     #print(comentarios)   
-    return render_template('paginaBlog.html', propio = propio, comentarios =comentarios,contenidoBlog=contenidoBlog, titulo=contenidoBlog['titulo'], ordenadaFecha=ordenadaFecha)
 
 # Da la ruta a resultados de busqueda por una palabra ingresada
 # Si la palabra no se encuentra en ninguno de los titulos se muestra un mensaje de error
@@ -300,9 +338,9 @@ def resultadoBusqueda(palabra ="" ):
     print(palabra)
     print(categoria)
     if categoria != "Todas":
-        objetos = Blog.query.filter_by(estado = 1, categoria = categoria)
+        objetos = Blog.query.filter_by(estado = 1, categoria = categoria, publico = True)
     else:
-        objetos = Blog.query.filter_by(estado = 1)
+        objetos = Blog.query.filter_by(estado = 1,publico = True)
     db = esBlogs.dump(objetos)
     resultados=[] 
     for diccionario in db:
@@ -401,6 +439,11 @@ def editar(blogId=0):
             contenido = request.form["cuerpoBlog"]
             titulo = request.form["titulo"]
             categoria = request.form["categorias"]
+            publico = request.form.get('publico')
+            if publico == None:
+                publico = False
+            else:
+                publico = True
             if request.files["subirImagen"] != None:
                 imagen = request.files["subirImagen"]
                 if imagen and allowed_file(imagen.filename):

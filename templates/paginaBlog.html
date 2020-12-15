@@ -3,6 +3,11 @@
                 <main id = "contenidoBlog" role="main" class ="contenedor">  
                     <!--Main content-->                
                     <article role="article">
+                        <section class="content">
+                            {% for message in get_flashed_messages() %}
+                            <div class="flash">{{ message }}</div>
+                            {% endfor %}
+                        </section>
                         <h2 class ="tituloBlog">{{titulo}}</h2>
                         <figure>                            
                             <img src="../static/imagenes/{{contenidoBlog['imagen']}}" alt="imagen del blog" width="640" height="213">

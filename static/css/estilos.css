@@ -149,13 +149,15 @@ main {
     margin: 0;
     grid-area: main;
     margin: 1%;
-    
 }
 main p{
   text-align: left;
   margin: 5%;
 }
 
+main .crear {
+    padding-bottom: 50%;
+}
 
 /*Barra de herminetas
 ----------------------------------*/

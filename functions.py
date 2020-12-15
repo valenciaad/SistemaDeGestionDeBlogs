@@ -18,7 +18,7 @@ user_reguex = "^[a-zA-Z0-9_.-]{8,}$"
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 def recientes():
-    objetos = Blog.query.filter_by(estado = 1).limit(5)
+    objetos = Blog.query.filter_by(estado = 1,publico = True).limit(5)
     ordenadaFecha = esBlogs.dump(objetos)
     ordenadaFecha.sort(reverse=True, key=lambda x: datetime.strptime(
                 x['fecha'], '%Y-%m-%dT%H:%M:%S.%f'))
@@ -45,7 +45,7 @@ def query(row):
 # palabra - palabra a buscar
 #resultados - array de dict con los matches
 def queryBuscar(pablara):
-    objetos = Blog.query.filter_by(estado = 1)
+    objetos = Blog.query.filter_by(estado = 1, publico = True)
     db = esBlogs.dump(objetos)
     resultados=[]
     #if os.path.exists('db.json'):
