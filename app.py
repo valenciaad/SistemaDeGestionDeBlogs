@@ -19,4 +19,7 @@ db.init_app(app)
 ma.init_app(app)
 app.register_blueprint(pages)
 
+if __name__ == '__main__':
+    #app.run(port=80,debug=True)
+    app.run(host='localhost', port=443, ssl_context=('micertificado.cer', 'llaveprivada.pem'))
 

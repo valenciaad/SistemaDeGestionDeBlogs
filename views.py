@@ -166,7 +166,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return render_template("index.html")
+    return redirect('/login')
 
 
 @pages.route('/crearBlog', methods=['GET', 'POST'])
