@@ -111,9 +111,7 @@ Utiliza un diseño atractivo, muchos curiosos en busca de contenido vendrán y e
     db.session.commit()
     print('Base de datos seeded')
 
-@pages.route('/')
-def home():
-    return render_template('index.html', titulo="Bienvenido")
+
 
 # login: función asignada a la ruta "/login" que admite los métodos GET and POST
 # de acuerdo a la configuración en index.html, se dejó por defecto el método POST
@@ -123,21 +121,33 @@ def home():
 # En el caso de encontrar un error diferente, ejecuta el código bajo "except"
 
 
+@pages.route('/')
 @pages.route("/login", methods=('GET', 'POST'))
 def login():
     #try:
+        
         username = request.form.get('user')
         password = request.form.get('pssw')
+        remember = request.form.get('recuerdame')
+        if remember != None:
+            remember = True
+        else:  
+            remember = False
         error = None        
         usuario = Usuario.query.filter_by(nombre = username ).first()
         #print(usuario)
+        if current_user.is_authenticated:
+            print(current_user)
+            return redirect('/paginaBlog')        
         if usuario and usuario.get_password(password):
-            login_user(usuario) 
-            return  redirect("/panelBlog")
+            login_user(usuario,  remember = remember) 
+            print(current_user)
+            return  redirect("/panelBlog")        
         else:
             error = "Usuario o contraseña incorrecto"
             flash(error)
             return render_template("index.html")
+        
         #if not isUsernameValid(username):
          #   error = "Usuario incorrecto"
          #   flash(error)
@@ -455,6 +465,7 @@ def editar(blogId=0):
             objeto.imagen=nombreImagen
             objeto.fecha=fecha
             objeto.categoria=categoria
+            objeto.publico = publico
             db.session.commit()
             return redirect('/paginaBlog/'+str(objeto.id_blog))
             #cuerpo = {"contenido": contenido,

@@ -6,6 +6,8 @@
         <form name="loginform" action="{{url_for('pages.login')}}" method="POST">
             <input type="text" name="user" id="id_user" placeholder="Usuario"><br><br>
             <input type="password" name="pssw" id="id_pssw" placeholder="Contraseña"><br><br>
+            <input type="checkbox" name="recuerdame" value="True"><br>
+            <label for="recuerdame"></label> recuerdame </label><br><br>
             <input type="submit" value="Log in">
         </form>
         <div>
