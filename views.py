@@ -13,7 +13,9 @@ from functions import *
 
 pages = Blueprint('pages',__name__, template_folder='templates')
 UPLOAD_FOLDER = os.path.abspath(os.getcwd()) + '\static\imagenes'
-
+global COOKIE_TIME_OUT
+COOKIE_TIME_OUT = 60*60*24*7 #7 days
+SESSION_COOKIE_SECURE = True
 
 
 
@@ -125,7 +127,12 @@ Utiliza un diseño atractivo, muchos curiosos en busca de contenido vendrán y e
 @pages.route("/login", methods=('GET', 'POST'))
 def login():
     #try:
-        
+        if request.cookies.get('uid'):
+            usuario= Usuario.query.filter_by(id=request.cookies.get('uid')).first()
+            login_user(usuario)
+            print(usuario)
+            return  redirect("/panelBlog") 
+
         username = request.form.get('user')
         password = request.form.get('pssw')
         remember = request.form.get('recuerdame')
@@ -140,8 +147,12 @@ def login():
             print(current_user)
             return redirect('/paginaBlog')        
         if usuario and usuario.get_password(password):
-            login_user(usuario,  remember = remember) 
-            print(current_user)
+            login_user(usuario)
+            if remember:
+                resp = make_response(redirect('/'))
+                resp.set_cookie('username',username,max_age=COOKIE_TIME_OUT, secure=True)
+                resp.set_cookie('uid',str(usuario.id),max_age=COOKIE_TIME_OUT,  secure=True)
+                return resp
             return  redirect("/panelBlog")        
         else:
             error = "Usuario o contraseña incorrecto"
@@ -166,7 +177,11 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect('/login')
+    resp = make_response(redirect( "/" ))
+    resp.delete_cookie('username','/',domain=None)
+    resp.delete_cookie('uid','/',domain=None)
+    return resp
+    #return redirect('/login')
 
 
 @pages.route('/crearBlog', methods=['GET', 'POST'])

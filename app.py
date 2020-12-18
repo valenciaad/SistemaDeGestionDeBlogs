@@ -4,14 +4,14 @@ import flask
 
 
 from classes import db,ma,login_manager
-
+from datetime import timedelta
 from views import pages
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = flask.Flask(__name__)
 app.secret_key = os.urandom(24)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir,'baseDatos.db')
-
+app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(minutes=10)
 
 
 login_manager.init_app(app)
