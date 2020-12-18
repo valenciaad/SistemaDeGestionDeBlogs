@@ -1,51 +1,51 @@
-{% extends 'base3por2.html' %}
-{%block header%}   
-                <main id = "contenidoBlog" role="main" class ="contenedor">  
-                    <!--Main content-->                
-                    <article role="article">
-                        <section class="content">
-                            {% for message in get_flashed_messages() %}
-                            <div class="flash">{{ message }}</div>
-                            {% endfor %}
-                        </section>
-                        <h2 class ="tituloBlog">{{titulo}}</h2>
-                        <figure>                            
-                            <img src="../static/imagenes/{{contenidoBlog['imagen']}}" alt="imagen del blog" width="640" height="213">
-                            
-                        </figure> 
-                        <a href="/descagar/{{contenidoBlog['id_blog']}}" title="Crea un nuevo Blog">Descarga este blog</a>
-                        <p style = "white-space: pre-wrap;">{{contenidoBlog['contenido']}}</p>                        
-                                          
-                </main>
-                <section class = "comentarios contenedor">
-                    <!--comments-->
-                    <h2>Comentarios:</h2>
-                    <form action="/paginaBlog/{{contenidoBlog['id_blog']}}" method="POST">
-                        <textarea  name="tComentario"  id="tComentario" placeholder="Escribe tu comentario ..."></textarea>
-                        <br />
-                        <input type="submit" name="Comentar" value="Comentar" class="boton" />
-                    </form>
-                    
-                    {% for comentario in comentarios%}
-                    <article class="comentario" >
-                        <p>{{comentario['nombre']}}</p>
-                        <p>{{comentario['contenido']}}</p>
-                    </article>
-                    {% endfor %}
-                    
-                </section>
-            </article>
-        {% if propio %}
-        <section class ="CEE contenedor" >
-            <h2>Barra de herminetas</h2>
-                <!--tool bar-->
-                <ul class="herramientas" >
-                    <li><a href="/crearBlog" title="Crea un nuevo Blog">Crear Blog</a></li>
-                    <li><a href="/editar/{{contenidoBlog['id_blog']}}" title="Edita este Blog">Editar</a></li>
-                    <li><a href="/eliminar/{{contenidoBlog['id_blog']}}" title="Elimina este blog">Eliminar</a></li>
-                </ul>            
+{% extends 'base3por2.html' %} {%block header%}
+<main id="contenidoBlog" role="main" class="contenedor">
+    <!--Main content-->
+    <article role="article">
+        <section class="content">
+            {% for message in get_flashed_messages() %}
+            <div class="flash">{{ message }}</div>
+            {% endfor %}
         </section>
-        {% endif %}
-    </body>
-    </html>
+        <h2 class="tituloBlog">{{titulo}}</h2>
+        <figure>
+            <img src="../static/imagenes/{{contenidoBlog['imagen']}}" alt="imagen del blog" width="640" height="213">
+
+        </figure>
+        <a href="/descagar/{{contenidoBlog['id_blog']}}" title="Crea un nuevo Blog">Descarga este blog</a>
+        <p style="white-space: pre-wrap;">{{contenidoBlog['contenido']}}</p>
+
+</main>
+<section class="comentarios contenedor">
+    <!--comments-->
+    <h2>Comentarios:</h2>
+    <form action="/paginaBlog/{{contenidoBlog['id_blog']}}" method="POST">
+        <textarea name="tComentario" id="tComentario" placeholder="Escribe tu comentario ..."></textarea>
+        <br />
+        <input type="submit" name="Comentar" value="Comentar" class="boton" />
+    </form>
+
+    {% for comentario in comentarios%}
+    <article class="comentario">
+        <h3>{{comentario['nombre']}}</h3>
+        <p>{{comentario['contenido']}}</p>
+    </article>
+    {% endfor %}
+
+</section>
+</article>
+{% if propio %}
+<section class="CEE contenedor">
+    <h2>Barra de herminetas</h2>
+    <!--tool bar-->
+    <ul class="herramientas">
+        <li><a href="/crearBlog" title="Crea un nuevo Blog">Crear Blog</a></li>
+        <li><a href="/editar/{{contenidoBlog['id_blog']}}" title="Edita este Blog">Editar</a></li>
+        <li><a href="/eliminar/{{contenidoBlog['id_blog']}}" title="Elimina este blog">Eliminar</a></li>
+    </ul>
+</section>
+{% endif %}
+</body>
+
+</html>
 {%endblock%}
