@@ -19,12 +19,11 @@ SESSION_COOKIE_SECURE = True
 
 
 
-#C:\Users\adria\.virtualenvs\SistemaDeGestionDeBlogs-Mr4h8l_d\Lib\site-packages\wkhtmltopdf\bin
-path_wkhtmltopdf = os.path.abspath(os.getcwd()) + '\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
-config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
-wkhtmltopdf_options =  {
-    'enable-local-file-access': None,
-}
+path_wkhtmltopdf = path_wkhtmltopdf = '/usr/local/bin/wkhtmltopdf'
+#config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+#wkhtmltopdf_options =  {
+#    'enable-local-file-access': None,
+#}
 
 @pages.cli.command('db_crear')
 def db_crear():

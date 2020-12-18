@@ -21,5 +21,5 @@ app.register_blueprint(pages)
 
 if __name__ == '__main__':
     #app.run(port=80,debug=True)
-    app.run(host='localhost', port=443, ssl_context=('micertificado.cer', 'llaveprivada.pem'))
+    app.run(host='0.0.0.0', port=443, ssl_context=('micertificado.cer', 'llaveprivada.pem'))
 
