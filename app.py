@@ -25,4 +25,4 @@ app.register_blueprint(pages)
 if __name__ == '__main__':
     #app.run(port=80,debug=True)
     app.run(host='0.0.0.0', port=443, ssl_context=('micertificado.cer', 'llaveprivada.pem'))
-
+#sudo gunicorn --workers=5 -b 0.0.0.0:443 --certfile=micertificado.cer --keyfile=llaveprivada.pem wsgi:application
