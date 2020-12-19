@@ -12,7 +12,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app = flask.Flask(__name__)
 app.secret_key = os.urandom(24)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir,'baseDatos.db')
-app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(minutes=10)
+#app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(minutes=10)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
