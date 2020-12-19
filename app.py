@@ -3,9 +3,11 @@ import flask
 from classes import db,ma,login_manager
 from datetime import timedelta
 from views import pages
+import warnings
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
     from flask_marshmallow import Marshmallow
+    
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = flask.Flask(__name__)
 app.secret_key = os.urandom(24)
