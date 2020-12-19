@@ -7,10 +7,8 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String
 from werkzeug.security import check_password_hash, generate_password_hash
 import warnings
-# https://github.com/marshmallow-code/flask-marshmallow/issues/53
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore")
-    from flask_marshmallow import Marshmallow
+
+
 db  = SQLAlchemy()
 ma = Marshmallow()
 login_manager = LoginManager()
