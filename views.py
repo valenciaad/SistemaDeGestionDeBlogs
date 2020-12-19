@@ -20,10 +20,10 @@ REMEMBER_COOKIE_SECURE = True
 
 
 path_wkhtmltopdf = path_wkhtmltopdf = '/usr/local/bin/wkhtmltopdf'
-#config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
-#wkhtmltopdf_options =  {
-#    'enable-local-file-access': None,
-#}
+config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+wkhtmltopdf_options =  {
+    'enable-local-file-access': None,
+}
 
 @pages.cli.command('db_crear')
 def db_crear():
