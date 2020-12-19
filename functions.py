@@ -6,6 +6,7 @@ from sqlalchemy.sql.elements import Null
 from validate_email import validate_email
 
 from classes import *
+SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # Expresión regular que permite verificar la contraseña.
 # Puede contener cualquier letra minúscula y mayúscula
