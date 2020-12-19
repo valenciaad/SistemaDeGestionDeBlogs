@@ -1,8 +1,5 @@
 import os
-
 import flask
-
-
 from classes import db,ma,login_manager
 from datetime import timedelta
 from views import pages
