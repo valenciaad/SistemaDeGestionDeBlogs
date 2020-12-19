@@ -439,7 +439,7 @@ def crearCuenta():
             db.session.commit()
             yag = yagmail.SMTP('uninortegrupo9b@gmail.com', 'unigrupob')
             yag.send(to=email, subject='Activa tu cuenta',
-                     contents='Bienvenido '+name+', usa este vínculo para activar tu cuenta: http://127.0.0.1:5000/validacion/'+ str (nuevoUsuario.validacion) )
+                     contents='Bienvenido '+name+', usa este vínculo para activar tu cuenta: https://52.91.45.81/validacion/'+ str (nuevoUsuario.validacion) )
             return verificarCorreo()
         else:
             flash('Correo inválido')
@@ -536,7 +536,7 @@ def recuperarPassword():
             db.session.commit()
             yag = yagmail.SMTP('uninortegrupo9b@gmail.com', 'unigrupob')
             yag.send(to=email, subject='Activa tu cuenta',
-                     contents='Bienvenido, usa este vínculo para recuperar  tu contraseña: http://127.0.0.1:5000/recuperar/'+str(usuario.validacion))
+                     contents='Bienvenido, usa este vínculo para recuperar  tu contraseña: https://52.91.45.81/recuperar/'+str(usuario.validacion))
             return verificarCorreo()
         else:
             flash('Correo inválido')
