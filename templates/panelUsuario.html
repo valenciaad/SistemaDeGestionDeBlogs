@@ -10,7 +10,7 @@
                     <label for="usuairos">Escoge un usuario:</label>
                     <select id="usuario" name="usuario">
                         {% for usuario in usuarios %}
-                          <option value="{{usuario['id_usuario']}}">{{usuario['nombre']}}</option>
+                          <option value="{{usuario['id']}}">{{usuario['nombre']}}</option>
                         {% endfor %}
                      </select>
                         <input type="submit"  value="Eliminar">
