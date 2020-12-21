@@ -397,7 +397,7 @@ def panelUsuario():
         objUsuario = Usuario.query.filter_by(id = usuario ).first()
         objUsuario.estado = False
         db.session.commit()                
-        redirect('/panelUsario')
+        redirect('/panelUsuario')
         
         
     return render_template('panelUsuario.html', admin=admin,usuarios=usuarios,titulo="Panel de usuario", ordenadaFecha=ordenadaFecha)
